@@ -1,0 +1,807 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #100f0f;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+h1,h2,h3,h4,h5,td,th{
+    color: white;
+}
+
+td{
+    vertical-align: middle;
+}
+
+th{
+    text-align: center;
+}
+
+.form-group{
+    margin-top: 15px;
+}
+
+sup{
+    color: white;
+}
+
+small{
+    color: #ffffff;
+}
+
+label{
+    color: white;
+    margin: 10px 0;
+}
+
+.precio-lista{
+    width: 100px;
+}
+
+dd,dt,dl{
+    color: white;
+}
+
+dt{
+    margin: 1rem 0;
+}
+
+.card.verdes .circle, .card.verdes .btn, #carta.verdes .btn{
+    background: #AFEB3B;
+    border: 3px solid #AFEB3B;
+}
+
+#carta.verdes{
+    border: 1px solid #AFEB3B;
+}
+
+#carta.verdes #precio{
+    color: #AFEB3B;
+    font-weight: 600;
+}
+
+.card.rosas .circle, .card.rosas .btn, #carta.rosas .btn{
+    background: #FF8D8D;
+    border: 3px solid #FF8D8D;
+}
+
+#carta.rosas{
+    border: 1px solid #FF8D8D;
+}
+
+#carta.rosas #precio{
+    color: #FF8D8D;
+    font-weight: 600;
+}
+
+.card.blancas .circle, .card.blancas .btn, #carta.blancas .btn{
+    background: #C7C7C7;
+    border: 3px solid #C7C7C7;
+}
+
+#carta.blancas{
+    border: 1px solid #C7C7C7;
+}
+
+#carta.blancas #precio{
+    color: #C7C7C7;
+    font-weight: 600;
+}
+
+.card.azules .circle, .card.azules .btn, #carta.azules .btn{
+    background: #787EFF;
+    border: 3px solid #787EFF;
+}
+
+#carta.azules{
+    border: 1px solid #787EFF;
+}
+
+#carta.azules #precio{
+    color: #787EFF;
+    font-weight: 600;
+}
+
+.card.amarillas .circle, .card.amarillas .btn, #carta.amarillas .btn{
+    background: #FFD727;
+    border: 3px solid #FFD727;
+}
+
+#carta.amarillas{
+    border: 1px solid #FFD727;
+}
+
+#carta.amarillas #precio{
+    color: #FFD727;
+    font-weight: 600;
+}
+
+.card.rojas .circle, .card.rojas .btn, #carta.rojas .btn{
+    background: #D72B2B;
+    border: 3px solid #D72B2B;
+}
+
+#carta.rojas{
+    border: 1px solid #D72B2B;
+}
+
+#carta.rojas #precio{
+    color: #D72B2B;
+    font-weight: 600;
+}
+
+.card{
+    position: relative;
+    background: #232323;
+    border-radius: 20px;
+    transform-style: preserve-3d;
+    height: 500px;
+}
+
+.card .card-title{
+    color: white;
+}
+
+#tienda-detalle{
+    min-height: 100%;
+    max-width: 100%;
+}
+
+#carta{
+    max-width: 600px;
+    position: relative;
+    margin-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid white;
+    border-radius: 20px;
+    padding: 5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+#carta p{
+    color: white;
+}
+
+#carta .btn{
+    color: black;
+}
+
+#carta .img-fluid{
+    max-width: 300px;
+    text-align: center;
+    margin: auto;
+}
+
+#carta #precio{
+    display: flex;
+    font-size: 2.3rem;
+    text-align: center;
+    margin: 2rem auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-fluid{
+    padding: 0;
+}
+
+#promo{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 100px 100px 0;
+}
+
+#promo h1{
+    font-weight: 600;
+    font-size: 5rem;
+    letter-spacing: 2px;
+}
+
+#promo .btn, #promo p{
+    color: white;
+}
+
+#promo.azules{
+    background: linear-gradient(to bottom, #4F5DFF, #4d71b4);
+}
+
+#promo.rosas{
+    background: linear-gradient(to bottom, #c456a3, #9f383f);
+}
+
+#promo.verdes{
+    background: linear-gradient(to bottom, #52A217, #91EF00);
+}
+
+#promo.amarillas{
+    background: linear-gradient(to bottom, #B48C00, #FFE000);
+}
+
+#promo.verdes h1,
+#promo.verdes h2,
+#promo.verdes p,
+#promo.verdes .btn,
+#promo.amarillas h1,
+#promo.amarillas h2,
+#promo.amarillas p,
+#promo.amarillas .btn,
+#promo.blancas h2,
+#promo.blancas p,
+#promo.blancas .btn{
+    color: black !important;
+}
+
+#promo.rojas{
+    background: linear-gradient(to bottom, #97271D, #ce2828);
+}
+
+#promo.blancas{
+    background: linear-gradient(to bottom, #3b3b3b, #bebebe);
+}
+
+#promo:before{
+    content: 'FOOT SHOP';
+    position: absolute;
+    font-size: 15vw;
+    color: rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    margin-top: 20vh;
+}
+
+.imgBx{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.text h2{
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.text{
+    margin-top: 2rem;
+}
+
+.text p{
+    color: white;
+}
+
+.text .btn{
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.rrss{
+    position: absolute;
+    bottom: 50px;
+    right: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    filter: invert(1);
+    row-gap: 20px;
+}
+
+#promo.amarillas .rrss,
+#promo.verdes .rrss,
+#promo.blancas .rrss{
+    filter: invert(0);
+}
+
+.rrss li{
+    list-style: none;
+}
+
+.rrss li a{
+    display: block;
+    transform: scale(0.7);
+}
+
+#promo .btn{
+    border: 1px solid white;
+}
+
+#promo .btn:hover{
+    background-color: white;
+    color: black;
+}
+
+#promo.amarillas .btn,
+#promo.verdes .btn,
+#promo.blancas .btn{
+    border: 1px solid black;
+}
+
+#promo.amarillas .btn:hover,
+#promo.verdes .btn:hover,
+#promo.blancas .btn:hover{
+    background-color: black;
+    color: white !important;
+}
+
+#sobre-nosotros p{
+    color: white;
+}
+
+#nosotros .tarjeta{
+    width: 340px;
+}
+
+#influencers.container .col-lg-4{
+    -webkit-box-reflect: below 1px linear-gradient(transparent, transparent, transparent, #0004);
+}
+
+#nosotros .col-12, #influencers .col-lg-4{
+    position: relative;
+    width: 340px;
+    height: 400px;
+    margin: 0 auto;
+    border-radius: 20px;
+    background: linear-gradient(45deg,#2da2ff 25%, #2c2c2c 25%, #2c2c2c 50%, #2da2ff 50%, #2da2ff 75%, #2c2c2c 75%, #2c2c2c 100%);
+    background-size: 40px 40px;
+    padding: 2rem 2rem 0 2rem;
+    filter: grayscale(1);
+    animation: tarjetas 1.5s linear infinite;
+    animation-play-state: paused;
+    transition: filter 1s;
+    display: flex;
+    justify-content: center;
+}
+
+#influencers .coscu{
+    background: linear-gradient(135deg, #1bde14 25%, #2c2c2c 25%, #2c2c2c 50%, #1bde14 50%, #1bde14 75%, #2c2c2c 75%, #2c2c2c 100%);
+    background-size: 40px 40px;
+    animation: tarjetas 1.5s linear infinite;
+    animation-play-state: paused;
+}
+
+#influencers .messi{
+    background: linear-gradient(45deg, #17bbf8 25%, #2c2c2c 25%, #2c2c2c 50%, #17bbf8 50%, #17bbf8 75%, #2c2c2c 75%, #2c2c2c 100%);
+    background-size: 40px 40px;
+    animation: tarjetas 1.5s linear infinite;
+    animation-play-state: paused;
+}
+
+#influencers .icardi{
+    background: linear-gradient(135deg, #ce2828 25%, #2c2c2c 25%, #2c2c2c 50%, #ce2828 50%, #ce2828 75%, #2c2c2c 75%, #2c2c2c 100%);
+    background-size: 40px 40px;
+    animation: tarjetas 1.5s linear infinite;
+    animation-play-state: paused;
+}
+
+#influencers .kun{
+    background: linear-gradient(45deg, #d9d029 25%, #2c2c2c 25%, #2c2c2c 50%, #d9d029 50%, #d9d029 75%, #2c2c2c 75%, #2c2c2c 100%);
+    background-size: 40px 40px;
+    animation: tarjetas 1.5s linear infinite;
+    animation-play-state: paused;
+}
+
+#influencers .ibai{
+    background: linear-gradient(135deg, #b0208a 25%, #2c2c2c 25%, #2c2c2c 50%, #b0208a 50%, #b0208a 75%, #2c2c2c 75%, #2c2c2c 100%);
+    background-size: 40px 40px;
+    animation: tarjetas 1.5s linear infinite;
+    animation-play-state: paused;
+}
+
+#influencers .duki{
+    background: linear-gradient(135deg, #b7593c 25%, #2c2c2c 25%, #2c2c2c 50%, #b7593c 50%, #b7593c 75%, #2c2c2c 75%, #2c2c2c 100%);
+    background-size: 40px 40px;
+    animation: tarjetas 1.5s linear infinite;
+    animation-play-state: paused;
+}
+
+#nosotros .col-12:hover, #influencers .col-lg-4:hover{
+    animation-play-state: running;
+    filter: grayscale(0);
+}
+
+#nosotros .col-12 img, #influencers .col-lg-4 img{
+    position: absolute;
+    bottom: 0;
+    transition: 0.5s;
+    height: 320px;
+}
+
+#nosotros .col-12:hover img, #influencers .col-lg-4:hover img{
+    height: 420px;
+}
+
+#consultas{
+    position: relative;
+}
+
+#consultas .imgbox{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+/*    width: 50%;
+    height: 100%;*/
+    background: #006dbc;
+}
+
+#consultas .contenido{
+    background-color: white;
+    padding: 3rem 2rem;
+}
+
+#consultas .row{
+    margin: 0;
+}
+
+#consultas .col-md-6{
+    padding: 0;
+}
+
+#consultas .btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 300px;
+    background-color: #006dbc;
+    text-transform: uppercase;
+}
+
+#consultas p{
+    max-width: 700px;
+}
+
+#thenav{
+    padding: 0.5rem 2rem;
+}
+
+#contacto, #error-page{
+   background: linear-gradient(-45deg, #830816, #960b45, #0a5d7a, #0d770a);
+    animation: backgroundAnimation 30s ease infinite;
+    background-size: 400% 400%;
+    min-height: 80vh;
+}
+
+#login{
+    background-image: url("../imgs/login.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#registrarse{
+    background-image: url("../imgs/fichaje.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#contacto > .container{
+    border: 1px solid #C7C7C7;
+    border-radius: 20px;
+    padding: 2rem 5rem;
+}
+
+#login > .container, #registrarse > .container{
+    background-color: rgba(0,0,0,0.85);
+    padding: 5rem;
+    border: 1px solid #C7C7C7;
+    border-radius: 20px;
+}
+
+.alert p{
+    margin: 0 !important;
+}
+
+#error-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#error-page img{
+    max-width: 500px;
+}
+
+.cartas{
+    position: relative;
+    width: 300px;
+    height: 400px;
+    background: linear-gradient(#2196f3,#2196f3 30%, #1d3548 30%);
+    margin: 10px;
+    border-radius: 20px;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+.cartas .img-fluid{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+    z-index: 2;
+    transform-origin: top;
+    background-color: #0a5d7a;
+    border-radius: 20px;
+}
+
+.cartas:hover .img-fluid{
+    transform: translateY(30px) scale(0.5);
+    background-color: transparent;
+}
+
+.cartas .content{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding-bottom: 30px;
+    flex-direction: column;
+    transform: translateY(100%);
+    transition: 0.5s;
+}
+
+.cartas:hover .content{
+    transform: translateY(0);
+}
+
+@media (min-width: 1200px) {
+    .card:before{
+        content: 'NIKE';
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 6em;
+        font-weight: 900;
+        color: white;
+        font-style: italic;
+        opacity: 0;
+        transition: 0.5s;
+    }
+
+    .card:after{
+        content: 'RUN';
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        font-size: 6em;
+        font-weight: 900;
+        color: white;
+        font-style: italic;
+        opacity: 0;
+        transition: 0.5s;
+    }
+
+    .card:hover:before,.card:hover:after{
+        opacity: 0.04;
+    }
+
+    .card .card-title{
+        position: absolute;
+        top: 0;
+        left: 0;
+        text-align: center;
+        color: white;
+        width: 100%;
+        transform-style: preserve-3d;
+        transform: translate3d(0,0,75px);
+        opacity: 0;
+        transition: 0.5s;
+        z-index: 10;
+        font-size: 2.5em;
+        font-weight: 600;
+    }
+
+    .card:hover .card-title{
+        top: 40px;
+        opacity: 1;
+    }
+
+    .card .btn{
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform-style: preserve-3d;
+        transform: translate3d(-50%,0,75px);
+        color: black;
+        transition: 0.5s;
+        opacity: 0;
+        z-index: 12;
+        background: transparent;
+    }
+
+    .card:hover .btn{
+        bottom: 30px;
+        opacity: 1;
+        transform: translate3d(-50%,0,150px);
+        z-index: 12;
+    }
+
+    .card .circle{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        transition: 0.5s;
+        background: white;
+        transform-style: preserve-3d;
+        transform: translate3d(-50%,-50%,50px);
+        z-index: 10;
+        opacity: 1;
+    }
+
+    .card .img-fluid{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 300px;
+        transition: 0.5s;
+        z-index: 11;
+        transform-style: preserve-3d;
+        transform: translate3d(-50%,-50%,60px) rotate(15deg);
+    }
+
+    .card:hover .img-fluid{
+        transform: translate3d(-50%,-50%,100px) rotate(-15deg);
+        max-width: 360px;
+    }
+
+    .card-body{
+        position: absolute;
+        left: 50%;
+        bottom: 5%;
+        z-index: 30;
+        transform: translate3d(-50%,0,150px);
+    }
+
+    .text{
+        max-width: 700px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .card .btn{
+        color: black;
+    }
+
+    #promo{
+        padding: 100px 2rem 0;
+    }
+
+    .rrss{
+        position: relative;
+        flex-direction: row;
+        row-gap: 20px;
+        justify-content: space-around;
+        align-items: center;
+        margin: 2em auto;
+        width: 100%;
+        padding: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    #nosotros, #influencers{
+        padding: 2rem;
+    }
+
+    #consultas .btn{
+        margin: 3rem auto 0 auto;
+    }
+
+    #consultas .img-fluid{
+        padding: 2rem;
+    }
+
+    #contacto, #login, #registrarse{
+        padding: 10px;
+    }
+
+    #contacto .container, #login .container, #registrarse .container{
+        padding: 2rem 1rem;
+    }
+
+    #contacto .btn, #registrarse .btn{
+        width: 100%;
+    }
+
+    footer p{
+        padding: 0 2rem;
+    }
+
+    .card{
+        display: flex;
+        height: 500px;
+        justify-content: space-between;
+    }
+
+    .card-header{
+        display: flex;
+        justify-content: center;
+    }
+
+    .card-body{
+        justify-content: flex-end;
+        align-items: center;
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        max-height: 50px;
+    }
+
+    .card-body .btn{
+        width: 100%;
+    }
+
+    .circle{
+        position: absolute;
+        width: 100%;
+        top: 50px;
+    }
+
+    #nosotros .tarjeta, #influencers .tarjeta{
+        width: auto;
+    }
+
+    #login{
+        background-image: url("../imgs/mobile/login.png");
+    }
+
+    #registrarse{
+        background-image: url("../imgs/mobile/fichaje.png");
+    }
+}
+
+@keyframes tarjetas {
+    0%{
+        background-position: 0;
+    }
+
+    0%{
+        background-position: 40px;
+    }
+}
+
+@keyframes backgroundAnimation {
+    0%{
+        background-position: 0 50%;
+    }
+
+    50%{
+        background-position: 100% 50%;
+    }
+
+    100%{
+        background-position: 0 50%;
+    }
+}
