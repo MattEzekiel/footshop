@@ -19,9 +19,15 @@ class Connection
     {
         if(self::$db === null) {
             try {
+
                 self::$db = new PDO("mysql:host=" . self::$host . ";dbname=" . self::$base . ";charset=utf8mb4", self::$user, self::$pass);
+
                 /*echo 'La conexión ha sido un éxito.';*/
+
+                self::$db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+
             } catch(PDOException $e) {
+
                 echo "No se pudo conectar a la base.";
                 exit;
             }

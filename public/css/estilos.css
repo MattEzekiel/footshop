@@ -486,6 +486,10 @@ dt{
     align-items: center;
 }
 
+#login > .container{
+    max-width: 800px;
+}
+
 #registrarse{
     background-image: url("../imgs/fichaje.jpeg");
     background-size: cover;

@@ -191,4 +191,14 @@ class Router
 
         return self::$baseUrlPath . $path;
     }
+
+    /**
+     * @param string $path
+     * @return string
+     */
+    public static function redirect(string $path = ""): string
+    {
+        header('Location: ' .self::urlTo($path));
+        exit;
+    }
 }

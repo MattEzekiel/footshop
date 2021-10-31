@@ -4,8 +4,12 @@ namespace App\Models;
 
 use App\DB\Connection;
 
-class Producto
+class Producto extends Modelo
 {
+    protected $tabla = 'zapatillas';
+    protected $primaryKey = 'id_zapatilla';
+    protected $atributos = ['nombre','descripcion','precio'];
+
     protected $id_zapatilla;
     protected $nombre;
     protected $descripcion;
@@ -13,39 +17,6 @@ class Producto
     protected $imagen;
     protected $imagen_alt;
 
-    /**
-     * @return Producto[]
-     */
-    public function todo() : array
-    {
-        $db = Connection::getConnection();
-        $query = "SELECT * FROM zapatillas";
-        $stmt = $db->prepare($query);
-        $stmt->execute();
-        $stmt->setFetchMode(\PDO::FETCH_CLASS, self::class);
-        return $stmt->fetchAll();
-    }
-
-    /**
-     * @param int $id
-     * @return Producto|null
-     */
-    public function getByPk(int $id): ? Producto
-    {
-        $db = Connection::getConnection();
-        $query = "SELECT * FROM zapatillas
-                   WHERE id_zapatilla = ?";
-        $stmt = $db->prepare($query);
-        $stmt->execute([$id]);
-        $stmt->setFetchMode(\PDO::FETCH_CLASS,self::class);
-        $zapatilla = $stmt->fetch();
-
-        if(!$zapatilla){
-            return null;
-        }
-
-        return $zapatilla;
-    }
 
     /**
      * @return int

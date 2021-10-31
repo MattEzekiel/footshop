@@ -50,6 +50,7 @@ $router->post('/cerrar-sesion', [AuthController::class, 'logout']);
 $router->get('/productos', [ProductoController::class, 'index']);
 $router->get('/productos/nuevo', [ProductoController::class, 'nuevoForm']);
 $router->get('/productos/{id}', [ProductoController::class,'ver']);
+$router->post('/productos/nuevo', [ProductoController::class,'nuevoProducto']);
 
 /**
  * Tienda Productos
