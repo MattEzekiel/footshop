@@ -3,6 +3,7 @@
 namespace App\Auth;
 
 use App\Models\Usuario;
+use App\Session\Session;
 
 class Auth
 {
@@ -41,7 +42,7 @@ class Auth
 
     public function logout() : void
     {
-        unset($_SESSION['id_usuario']);
+        Session::delete('id_usuario');
     }
 
     /**
@@ -49,7 +50,7 @@ class Auth
      */
     public function autenticar(Usuario $usuario) : void
     {
-        $_SESSION['id_usuario'] = $usuario->getIdUsuario();
+        Session::set('id_usuario', $usuario->getIdUsuario());
     }
 
     /**
@@ -57,7 +58,7 @@ class Auth
      */
     public function isAutenticado(): bool
     {
-        return isset($_SESSION['id_usuario']);
+        return Session::has('id_usuario');
     }
 
     /**
@@ -71,7 +72,7 @@ class Auth
 
         if($this->usuario === null){
             $usuario = new Usuario();
-            $this->usuario = $usuario->getByPk($_SESSION['id_usuario']);
+            $this->usuario = $usuario->getByPk(Session::get('id_usuario'));
         }
 
         return $this->usuario;

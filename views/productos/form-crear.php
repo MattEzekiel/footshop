@@ -1,15 +1,11 @@
 <?php
 /**
  * @var App\Models\Producto[] $productos
+ * @var array $errors
+ * @var array $oldData
  */
 
 use App\Router;
-
-$nombre = $_SESSION['nombre'] ?? null;
-$descripcion = $_SESSION['descripcion'] ?? null;
-$precio = $_SESSION['precio'] ?? null;
-
-unset($_SESSION['nombre'],$_SESSION['descripcion'],$_SESSION['precio']);
 
 ?>
 <main class="container py-3 h-100">
@@ -27,20 +23,20 @@ unset($_SESSION['nombre'],$_SESSION['descripcion'],$_SESSION['precio']);
                             class="form-control"
                             placeholder="Ingrese aquí el nombre del producto"
                             <?php
-                                if (isset($nombre)):
+                                if (isset($errores['nombre'])):
                             ?>
                                 aria-describedby="error-nombre"
                             <?php
                                 endif;
                             ?>
-                            value="<?= $_SESSION['old_data']['nombre'] ?? '' ;?>"
+                            value="<?= $oldData['nombre'] ?? '' ;?>"
                     >
                     <small>El producto debe contener al menos 3 caracteres</small>
                     <?php
-                        if (isset($nombre)):
+                        if (isset($errores['nombre'])):
                     ?>
-                        <div class="alert alert-danger">
-                            <?= $nombre ;?>
+                        <div class="alert alert-danger" id="error-nombre">
+                            <span class="visually-hidden">Error: </span><?= $errores['nombre'][0] ;?>
                         </div>
                     <?php
                         endif;
@@ -57,20 +53,20 @@ unset($_SESSION['nombre'],$_SESSION['descripcion'],$_SESSION['precio']);
                             class="form-control"
                             placeholder="Ingrese aquí el precio del producto"
                         <?php
-                            if (isset($precio)):
+                            if (isset($errores['precio'])):
                         ?>
                             aria-describedby="error-precio"
                         <?php
                             endif;
                         ?>
-                            value="<?= $_SESSION['old_data']['precio'] ?? '' ;?>"
+                            value="<?= $oldData['precio'] ?? '' ;?>"
                     >
                     <small>Solo caracteres numéricos están permitidos en este campo</small>
                     <?php
-                        if (isset($precio)):
+                        if (isset($errores['precio'])):
                     ?>
-                        <div class="alert alert-danger">
-                            <?= $precio ;?>
+                        <div class="alert alert-danger"  id="error-precio">
+                            <span class="visually-hidden">Error: </span><?= $errores['precio'][0] ;?>
                         </div>
                     <?php
                         endif;
@@ -88,18 +84,18 @@ unset($_SESSION['nombre'],$_SESSION['descripcion'],$_SESSION['precio']);
                     rows="10"
                     placeholder="Ingrese aquí la descripción del producto"
                     <?php
-                        if (isset($descripcion)):
+                        if (isset($errores['descripcion'])):
                     ?>
                         aria-describedby="error-descripcion"
                     <?php
                         endif;
                     ?>
-            ><?= $_SESSION['old_data']['descripcion'] ?? '' ;?></textarea>
+            ><?= $oldData['descripcion'] ?? '' ;?></textarea>
             <?php
-                if (isset($descripcion)):
+                if (isset($errores['descripcion'])):
             ?>
-                <div class="alert alert-danger">
-                    <?= $descripcion ;?>
+                <div class="alert alert-danger" id="error-descripcion">
+                    <span class="visually-hidden">Error: </span><?= $errores['descripcion'][0];?>
                 </div>
             <?php
                 endif;

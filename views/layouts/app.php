@@ -3,11 +3,11 @@
 
 use App\Auth\Auth;
 use App\Router;
+use App\Session\Session;
 
-$success = $_SESSION['success'] ?? null;
-$error = $_SESSION['error'] ?? null;
-$message = $_SESSION['message'] ?? null;
-unset($_SESSION['success'], $_SESSION['error'], $_SESSION['message']);
+$success = Session::flash('success');
+$error = Session::flash('error');
+$message = Session::flash('message');
 
 $auth = new Auth();
 ?>

@@ -40,10 +40,29 @@ $auth = new Auth;
                     <td><?= $producto->getDescripcion();?></td>
                     <td class="text-center precio-lista">$ <?= number_format($producto->getPrecio(),0,',','.');?></td>
                     <td><img class="img-fluid" src="<?= Router::urlTo('/imgs/') . $producto->getImg();?> " alt="<?= $producto->getImgAlt() ;?>"></td>
-                    <td><a href="<?= Router::urlTo('productos/' . $producto->getIdZapatilla()) ;?>" role="button" class="btn btn-toolbar btn-outline-info">Ver Detalle</a></td>
+                    <td>
+                        <a href="<?= Router::urlTo('productos/' . $producto->getIdZapatilla()) ;?>" role="button" class="btn btn-toolbar btn-outline-info">Ver Detalle</a>
+                        <form class="eliminar mt-3" action="<?= Router::urlTo('productos/' . $producto->getIdZapatilla() . '/eliminar') ;?>" method="post">
+                            <button class="btn w-100 btn-outline-danger" type="submit">Eliminar</button>
+                        </form>
+                    </td>
                 </tr>
             <?php endforeach; ?>
             </tbody>
         </table>
     </div>
 </main>
+<script>
+    let eliminar = document.querySelectorAll('.eliminar');
+
+    for (let i = 0; i < eliminar.length; i++){
+        eliminar[i].addEventListener('submit', function (e) {
+            e.preventDefault();
+            if(confirm('¿Desea eliminar la zapatilla de la base de datos?')){
+                e.target.submit();
+            } else {
+                //Nada
+            }
+        })
+    }
+</script>

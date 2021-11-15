@@ -4,16 +4,16 @@
  */
 require_once __DIR__ . "/../vendor/autoload.php";
 
-session_start();
-
 $basePath = realpath(__DIR__ . "/..");
-
 
 use App\Controllers\AuthController;
 use App\Controllers\ContactoController;
 use App\Controllers\InicioController;
 use App\Controllers\ProductoController;
 use App\Controllers\TiendaController;
+use App\Session\Session;
+
+Session::start();
 
 $router = new App\Router($basePath);
 
@@ -50,6 +50,7 @@ $router->post('/cerrar-sesion', [AuthController::class, 'logout']);
 $router->get('/productos', [ProductoController::class, 'index']);
 $router->get('/productos/nuevo', [ProductoController::class, 'nuevoForm']);
 $router->get('/productos/{id}', [ProductoController::class,'ver']);
+$router->post('/productos/{id}/eliminar', [ProductoController::class,'eliminar']);
 $router->post('/productos/nuevo', [ProductoController::class,'nuevoProducto']);
 
 /**

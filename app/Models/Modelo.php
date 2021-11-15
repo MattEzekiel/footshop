@@ -105,4 +105,17 @@ class Modelo
         }
         return $valores;
     }
+
+    /**
+     * @param $pk
+     * @throws PDOException
+     */
+    public function delete($pk): void
+    {
+        $db = Connection::getConnection();
+        $query = "DELETE FROM " . $this->tabla . "
+                  WHERE " . $this->primaryKey . " = ?";
+        $stmt = $db->prepare($query);
+        $stmt->execute([$pk]);
+    }
 }

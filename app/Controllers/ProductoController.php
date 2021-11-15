@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Models\Producto;
 use App\Router;
+use App\Session\Session;
+use App\Validation\Validator;
 use App\View;
 
 class ProductoController
@@ -18,8 +20,15 @@ class ProductoController
 
     public static function nuevoForm()
     {
+        $oldData = Session::flash('old_data',[]);
+
+        /**
+         * @var {String} Errores = Message
+         */
+        $errores = Session::flash('message',[]);
+
         $view = new View();
-        $view->render('productos/form-crear');
+        $view->render('productos/form-crear', ['errores' => $errores, 'oldData' => $oldData]);
     }
 
     public static function ver()
@@ -33,78 +42,58 @@ class ProductoController
 
     public static function nuevoProducto()
     {
-        $nombre = $_POST['nombre'];
-        $precio = $_POST['precio'];
-        $descripcion = $_POST['descripcion'];
+        $validador = new Validator($_POST,[
+            'nombre' => ['required','min:3'],
+            'descripcion' => ['required','min:11'],
+            'precio' => ['required','numeric'],
+        ]);
 
-        self::confirmarNombre($nombre);
-        self::confirmarPrecio($precio);
-        self::confirmarDescripcion($descripcion);
-        self::errores();
+        if($validador->fails()){
+            Session::set('old_data', $_POST);
+            Session::set('error',"alert-danger");
+            Session::set('message',$validador->getErrores());
+            Router::redirect('/productos/nuevo');
+        }
 
         $datos = [
-            'nombre' => $nombre,
-            'descripcion' => $descripcion,
-            'precio' => $precio,
+            'nombre' => $_POST['nombre'],
+            'descripcion' => $_POST['descripcion'],
+            'precio' => $_POST['precio'],
         ];
 
         try {
             (new Producto())->crear($datos);
 
-            $_SESSION['message'] = "Su producto ha sido ingresado con éxito";
-            $_SESSION['success'] = "alert-success";
-            unset($_SESSION['old_data']);
+            Session::set('message', "Su producto ha sido ingresado con éxito");
+            Session::set('success', "alert-success");
+            Session::delete('old_data');
 
             Router::redirect('productos');
 
         }catch (\Exception $e) {
-
-            $_SESSION['old_data'] = $_POST;
-            $_SESSION['message'] = "Hubo un error al momento de generar su producto. Pruebe de nuevo más tarde";
-            $_SESSION['error'] = "alert-danger";
+            Session::set('old_data',$_POST);
+            Session::set('messasge',"Hubo un error al momento de generar su producto. Pruebe de nuevo más tarde");
+            Session::set('error',"alert-danger");
             Router::redirect('/productos/nuevo');
             exit;
         }
 
-        }
-
-    /**
-     * @param $nombre
-     */
-    public static function confirmarNombre($nombre)
-    {
-        if(strlen(trim($nombre)) < 3){
-            $_SESSION['nombre'] = "El nombre del producto es demasiado corto.";
-        }
     }
 
-    /**
-     * @param $precio
-     */
-    public static function confirmarPrecio($precio){
-        if (!is_numeric($precio)){
-            $_SESSION['precio'] = "El precio debe ser un número.";
-        }
-    }
-
-    /**
-     * @param $descripcion
-     */
-    public static function confirmarDescripcion($descripcion)
+    public static function eliminar()
     {
-        if(strlen(trim($descripcion)) < 11){
-            $_SESSION['descripcion'] = "La descripción es demasiado corta.";
-        }
-    }
+        $parametros = Router::getRouteParameters();
 
-    public static function errores()
-    {
-        if(isset($_SESSION['nombre']) || isset($_SESSION['precio']) || isset($_SESSION['descripcion'])){
-            $_SESSION['old_data'] = $_POST;
-            $_SESSION['message'] = "Hubieron errores al momento de generar su producto";
-            $_SESSION['error'] = "alert-danger";
-            Router::redirect('/productos/nuevo');
-            exit;
+        try {
+            (new Producto())->delete($parametros['id']);
+
+            Session::set('message', "La zapatilla fue borrada de la base de datos");
+            Session::set('success', "alert-success");
+            Router::redirect('/productos');
+        } catch (\Exception $e) {
+            Session::set('message', "Hubo un error al intentar borrar la zapatilla. Pruebe de nuevo más tarde");
+            Session::set('error', "alert-danger");
+            Router::redirect('/productos');
         }
     }
 
