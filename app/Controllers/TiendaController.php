@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Marca;
 use App\Models\Producto;
 use App\Router;
 use App\View;
@@ -21,7 +22,10 @@ class TiendaController
         $parametros = Router::getRouteParameters();
         $producto = new Producto();
         $producto = $producto->getByPk($parametros['id']);
+        $prodMarca = $producto->getIdMarca();
+        $marca = new Marca();
+        $marca = $marca->getById($prodMarca);
         $view = new View();
-        $view->render('tienda/detalle', ['producto' => $producto]);
+        $view->render('tienda/detalle', ['producto' => $producto, 'marca' => $marca]);
     }
 }

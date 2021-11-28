@@ -179,6 +179,7 @@ dt{
     max-width: 300px;
     text-align: center;
     margin: auto;
+    width: 100%;
 }
 
 #carta #precio{
@@ -783,6 +784,10 @@ dt{
 
     #registrarse{
         background-image: url("../imgs/mobile/fichaje.png");
+    }
+
+    #carta{
+        padding: 2rem;
     }
 }
 

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\DB\Connection;
 
-class Influencers
+class Influencer
 {
     protected $id_influencer;
     protected $nombre;

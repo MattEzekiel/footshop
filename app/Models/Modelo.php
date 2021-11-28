@@ -23,6 +23,16 @@ class Modelo
     protected $atributos = [];
 
     /**
+     * @var array
+     */
+    protected $relaciones = [
+        '1-1' => [],
+        '1-n' => [],
+        'n-1' => [],
+        'n-n' => [],
+    ];
+
+    /**
      * @return static[]
      */
     public function todo() : array
@@ -37,9 +47,10 @@ class Modelo
 
     /**
      * @param int $id
+     * @param array $relaciones
      * @return static|null
      */
-    public function getByPk(int $id): ? Modelo
+    public function getByPk(int $id, array $relaciones = []): ? Modelo
     {
         $db = Connection::getConnection();
         $query = "SELECT * FROM " . $this->tabla . "
@@ -53,7 +64,26 @@ class Modelo
             return null;
         }
 
+        $modelo->cargarRelaciones($relaciones);
+
         return $modelo;
+    }
+
+    /**
+     * @param array $relations
+     */
+    public function cargarRelaciones(array $relations = [])
+    {
+        foreach($relations as $relation) {
+            if(isset($this->relations['n-1'][$relation])) {
+                $relationData = $this->relations['n-1'][$relation];
+                /** @var Modelo $relationObj */
+                $relationObj = new $relation;
+                $fk = $this->{$relationData['fk']};
+                $obj = $relationObj->getByPk($fk);
+                $this->{$relationData['prop']} = $obj;
+            }
+        }
     }
 
     /**

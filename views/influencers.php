@@ -1,6 +1,6 @@
 <?php
 /**
- * @var App\Models\Influencers[] $influencers
+ * @var App\Models\Influencer[] $influencers
  */
 
 use App\Router;

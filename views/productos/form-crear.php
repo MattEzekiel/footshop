@@ -1,16 +1,20 @@
 <?php
+
+use App\Models\Marca;
+
 /**
  * @var App\Models\Producto[] $productos
  * @var array $errors
  * @var array $oldData
+ * @var array $marcas
  */
 
 use App\Router;
 
 ?>
 <main class="container py-3 h-100">
-    <h1>Sección en construcción</h1>
-    <p class="text-white my-4">Todavía no se ha terminado de crear esta sección. <a href="<?= Router::urlTo('/productos') ;?>">Volver atrás</a></p>
+    <h1>Cargue el nuevo producto</h1>
+    <p class="text-white my-4">Complete el formulario para guardar un nuevo producto o si lo desea puede <a href="<?= Router::urlTo('/productos') ;?>">volver atrás</a></p>
     <form action="<?= Router::urlTo('productos/nuevo') ;?>" method="post">
         <div class="row">
             <div class="col-md-6">
@@ -100,6 +104,26 @@ use App\Router;
             <?php
                 endif;
             ?>
+        </div>
+        <div class="form-group">
+            <label for="id_marca">Marca</label>
+            <select
+                    name="id_marca"
+                    id="id_marca"
+                <?= isset($errors['id_marca']) ? 'aria-describedby="error-id_marca"' : '';?>
+            >
+                <?php
+                foreach ($marcas as $marca):
+                    ?>
+                    <option
+                            value="<?= $marca->getIdMarca() ;?>"
+                    >
+                        <?= ucfirst($marca->getMarca()) ;?>
+                    </option>
+                <?php
+                endforeach;
+                ?>
+            </select>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-lg btn-outline-light">Guardar</button>

@@ -1,6 +1,7 @@
 <?php
 /**
  * @var \App\Models\Producto $producto
+ * @var \App\Models\Producto $marca
  */
 ?>
 
@@ -9,6 +10,8 @@
     <dl>
         <dt>Imagen</dt>
         <dd><img style="max-width: 260px" class="card-img" src="<?= \App\Router::urlTo('/imgs/') . $producto->getImg() ;?>" alt="<?= $producto->getImgAlt() ;?>"></dd>
+        <dt>Marca:</dt>
+        <dd><?= ucfirst($marca->getNombre()) ;?></dd>
         <dt>Descripción</dt>
         <dd><?= $producto->getDescripcion() ;?></dd>
         <dt>Precio</dt>

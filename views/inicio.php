@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\Models\Producto $producto
- * @var \App\Models\Influencers[] $influencers
+ * @var \App\Models\Influencer[] $influencers
  */
 
 use App\Router;

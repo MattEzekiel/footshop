@@ -12,7 +12,7 @@ use App\Router;
             foreach ($productos as $producto):
         ?>
             <div class="col-lg-4 col-md-6">
-                <div class="card <?= strtolower($producto->getImgAlt()) ;?>">
+                <article class="card <?= strtolower($producto->getImgAlt()) ;?>">
                     <div class="card-header">
                         <h2 class="card-title">
                             <?= $producto->getNombre(); ;?>
@@ -23,7 +23,7 @@ use App\Router;
                     <div class="card-body w-100">
                        <a role="button" class="btn btn-primary btn-lg btn-toolbar align-items-center justify-content-center" href="<?= Router::urlTo('tienda/' . $producto->getIdZapatilla()) ;?>">Ver más</a>
                     </div>
-                </div>
+                </article>
             </div>
         <?php
             endforeach;

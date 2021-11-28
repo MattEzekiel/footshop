@@ -54,28 +54,30 @@ $auth = new Auth();
                         endif;
                     ?>
                     <li class="nav-item"><a href="<?= Router::urlTo('contacto') ;?>" class="nav-link">Contacto</a></li>
-                    <ul class="list-unstyled navbar-nav float-end ms-lg-auto">
-                        <?php
-                        if ($auth->isAutenticado()):
+                    <li class="navbar-nav float-end ms-lg-auto">
+                        <ul class="list-unstyled navbar-nav float-end ms-lg-auto">
+                            <?php
+                            if ($auth->isAutenticado()):
+                                ?>
+                                <li class="nav-item">
+                                    <form action="<?= Router::urlTo('cerrar-sesion') ;?>" method="post">
+                                        <button class="btn nav-link" type="submit">Cerrar Sesión (<?= $auth->getUsuario()->getNombre() . " " . $auth->getUsuario()->getApellido() ;?>)</button>
+                                    </form>
+                                </li>
+                            <?php
+                            else:
+                                ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?= Router::urlTo('iniciar-sesion') ;?>">Iniciar Sesión</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?= Router::urlTo('registro') ;?>">Registrarse</a>
+                                </li>
+                            <?php
+                            endif;
                             ?>
-                            <li class="nav-item">
-                                <form action="<?= Router::urlTo('cerrar-sesion') ;?>" method="post">
-                                    <button class="btn nav-link" type="submit">Cerrar Sesión (<?= $auth->getUsuario()->getNombre() . " " . $auth->getUsuario()->getApellido() ;?>)</button>
-                                </form>
-                            </li>
-                        <?php
-                        else:
-                            ?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= Router::urlTo('iniciar-sesion') ;?>">Iniciar Sesión</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= Router::urlTo('registro') ;?>">Registrarse</a>
-                            </li>
-                        <?php
-                        endif;
-                        ?>
-                    </ul>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

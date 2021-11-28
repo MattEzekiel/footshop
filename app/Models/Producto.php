@@ -8,7 +8,15 @@ class Producto extends Modelo
 {
     protected $tabla = 'zapatillas';
     protected $primaryKey = 'id_zapatilla';
-    protected $atributos = ['nombre','descripcion','precio'];
+    protected $atributos = ['id_marca','nombre','descripcion','precio'];
+    protected $relaciones = [
+        'n-1' => [
+            Marca::class => [
+                'fk' => 'id_marca',
+                'prop' => 'marca',
+            ],
+        ]
+    ];
 
     protected $id_zapatilla;
     protected $nombre;
@@ -16,6 +24,12 @@ class Producto extends Modelo
     protected $precio;
     protected $imagen;
     protected $imagen_alt;
+    protected $id_marca;
+
+    /**
+     * @var Marca
+     */
+    protected $marca;
 
 
     /**
@@ -28,6 +42,18 @@ class Producto extends Modelo
         $stmt = $db->prepare($query);
         $stmt->execute();
         return $stmt->rowCount();
+    }
+
+    /**
+     * @return int last ID
+     */
+    public function lastId(): int
+    {
+        $db = Connection::getConnection();
+        $query = "SELECT MAX(id_zapatilla) FROM " . $this->tabla;
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetch();
     }
 
     /**
@@ -77,4 +103,29 @@ class Producto extends Modelo
     {
         return $this->imagen_alt;
     }
+
+    /**
+     * @return Marca
+     */
+    public function getMarca(): Marca
+    {
+        return $this->marca;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdMarca()
+    {
+        return $this->id_marca;
+    }
+
+    /**
+     * @param Marca $marca
+     */
+    public function setMarca(Marca $marca): void
+    {
+        $this->marca = $marca;
+    }
+
 }

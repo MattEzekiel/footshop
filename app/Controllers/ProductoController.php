@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Marca;
 use App\Models\Producto;
 use App\Router;
 use App\Session\Session;
@@ -21,14 +22,11 @@ class ProductoController
     public static function nuevoForm()
     {
         $oldData = Session::flash('old_data',[]);
-
-        /**
-         * @var {String} Errores = Message
-         */
         $errores = Session::flash('message',[]);
 
+        $marcas = (new Marca())->todo();
         $view = new View();
-        $view->render('productos/form-crear', ['errores' => $errores, 'oldData' => $oldData]);
+        $view->render('productos/form-crear', ['marcas' => $marcas, 'errores' => $errores, 'oldData' => $oldData]);
     }
 
     public static function ver()
@@ -36,8 +34,11 @@ class ProductoController
         $parametros = Router::getRouteParameters();
         $producto = new Producto();
         $producto = $producto->getByPk($parametros['id']);
+        $prodMarca = $producto->getIdMarca();
+        $marca = new Marca();
+        $marca = $marca->getById($prodMarca);
         $view = new View();
-        $view->render('productos/detalle', ['producto' => $producto]);
+        $view->render('productos/detalle', ['producto' => $producto, 'marca' => $marca]);
     }
 
     public static function nuevoProducto()
@@ -46,7 +47,9 @@ class ProductoController
             'nombre' => ['required','min:3'],
             'descripcion' => ['required','min:11'],
             'precio' => ['required','numeric'],
+            'id_marca' => ['required','numeric'],
         ]);
+
 
         if($validador->fails()){
             Session::set('old_data', $_POST);
@@ -59,7 +62,9 @@ class ProductoController
             'nombre' => $_POST['nombre'],
             'descripcion' => $_POST['descripcion'],
             'precio' => $_POST['precio'],
+            'id_marca' => $_POST['id_marca'],
         ];
+
 
         try {
             (new Producto())->crear($datos);

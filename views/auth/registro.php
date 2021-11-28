@@ -29,6 +29,7 @@ unset($_SESSION['nombre-registro'],$_SESSION['apellido-registro'],$_SESSION['ema
                         if (isset($nombre)):
                     ?>
                         aria-describedby="error-nombre"
+                        value="<?= $_SESSION['old_data']['nombre'] ;?>"
                     <?php
                         endif;
                     ?>
@@ -56,6 +57,7 @@ unset($_SESSION['nombre-registro'],$_SESSION['apellido-registro'],$_SESSION['ema
                         if (isset($apellido)):
                     ?>
                         aria-describedby="error-apellido"
+                        value="<?= $_SESSION['old_data']['apellido'] ;?>"
                     <?php
                     endif;
                     ?>
@@ -83,6 +85,7 @@ unset($_SESSION['nombre-registro'],$_SESSION['apellido-registro'],$_SESSION['ema
                         if (isset($email)):
                     ?>
                         aria-describedby="error-email"
+                        value="<?= $_SESSION['old_data']['email'] ;?>"
                     <?php
                         endif;
                     ?>

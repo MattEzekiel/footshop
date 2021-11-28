@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\Influencers;
+use App\Models\Influencer;
 use App\Models\Producto;
 use App\View;
 
@@ -15,7 +15,7 @@ class InicioController
         $numeroAleatoreo = rand(1, $numeros);
         $producto = $productos->getByPk($numeroAleatoreo);
 
-        $influencer = new Influencers();
+        $influencer = new Influencer();
         $influencers = $influencer->randomHome();
 
         $view = new View();
@@ -24,7 +24,7 @@ class InicioController
 
     public static function influencers()
     {
-        $influencer = new Influencers();
+        $influencer = new Influencer();
         $influencers = $influencer->todos();
         $view = new View();
         $view->render('influencers', ['influencers' => $influencers]);
