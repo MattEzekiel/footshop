@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\DB\Connection;
+use PDO;
 use PDOException;
 
 class Modelo
@@ -32,6 +33,15 @@ class Modelo
         'n-n' => [],
     ];
 
+    protected $pagination = [
+        'pagination' => false,
+        'rows' => null,
+        'total' => null,
+        'offset' => null,
+        'pages' => null,
+        'pageNow' => 1,
+    ];
+
     /**
      * @param array $buscar
      * @return static[]
@@ -41,18 +51,52 @@ class Modelo
         $db = Connection::getConnection();
         $query = "SELECT * FROM " .$this->tabla;
         $buscarValores = [];
+        $queryValues = '';
         if (count($buscar) > 0){
             $buscarData = [];
             foreach ($buscar as $buscarItem){
                 $buscarData[] = $buscarItem[0] . " " . $buscarItem[1] . " :" . $buscarItem[0];
                 $buscarValores[$buscarItem[0]] = $buscarItem[2];
             }
-            $query .= " WHERE " . implode(" AND ", $buscarData);
+            $queryValues = " WHERE " . implode(" AND ", $buscarData);
+            $query .= $queryValues;
+        }
+        if ($this->pagination['pagination']){
+            $this->queryPaginador($queryValues, $buscarValores);
+            $query .= " LIMIT " . $this->pagination['offset'] . ', ' . $this->pagination['rows'];
         }
         $stmt = $db->prepare($query);
         $stmt->execute($buscarValores);
         $stmt->setFetchMode(\PDO::FETCH_CLASS, static::class);
         return $stmt->fetchAll();
+    }
+
+    /**
+     * @param int $rows
+     * @return static
+     */
+    public function withPagination(int $rows = 6): self
+    {
+        $this->pagination['pagination'] = true;
+        $this->pagination['rows'] = $rows;
+        $this->pagination['pageNow'] = (int) ($_GET['page'] ?? 1);
+        $this->pagination['offset'] = ($rows * $this->pagination['pageNow']) - $rows;
+        return $this;
+    }
+
+    /**
+     * @param string $query
+     * @param array $values
+     */
+    protected function queryPaginador(string $query = "", array $values = [])
+    {
+        $db = Connection::getConnection();
+        $query = "SELECT COUNT(*) AS total FROM ". $this->tabla . " " . $query;
+        $stmt = $db->prepare($query);
+        $stmt->execute($values);
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        $this->pagination['total'] = $resultado['total'];
+        $this->pagination['pages'] = ceil($resultado['total'] / $this->pagination['rows']);
     }
 
     /**
@@ -157,5 +201,10 @@ class Modelo
                   WHERE " . $this->primaryKey . " = ?";
         $stmt = $db->prepare($query);
         $stmt->execute([$pk]);
+    }
+
+    public function getPagination(): array
+    {
+        return $this->pagination;
     }
 }

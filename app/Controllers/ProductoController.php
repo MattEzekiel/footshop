@@ -14,9 +14,27 @@ class ProductoController
 {
     public static function index()
     {
-        $productos = (new Producto())->todo();
+        $producto = new Producto();
+
+        $buscarValores = [];
+        $condiciones = [];
+
+        if (!empty($_GET['nombre'])){
+            $buscarValores['nombre'] = $_GET['nombre'];
+            $condiciones[] = ['nombre','LIKE','%' . $_GET['nombre'] . '%'];
+        }
+        if (!empty($_GET['id_marca'])){
+            $buscarValores['id_marca'] = $_GET['id_marca'];
+            $condiciones[] = ['id_marca','=',$_GET['id_marca']];
+        }
+
+        $productos = $producto
+            ->withPagination(6)
+            ->todo($condiciones);
+        $pagination = $producto->getPagination();
+        $marcas = (new Marca())->todo();
         $view = new View();
-        $view->render('productos/index', ['productos' => $productos]);
+        $view->render('productos/index', ['productos' => $productos, 'marcas' => $marcas, 'pagination' => $pagination]);
     }
 
     public static function nuevoForm()

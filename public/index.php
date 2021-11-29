@@ -6,6 +6,8 @@ require_once __DIR__ . "/../vendor/autoload.php";
 
 $basePath = realpath(__DIR__ . "/..");
 
+\App\Env\Loader::cargar($basePath);
+
 use App\Controllers\AuthController;
 use App\Controllers\ContactoController;
 use App\Controllers\InicioController;
