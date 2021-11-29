@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Files\SubirArchivo;
 use App\Models\Marca;
 use App\Models\Producto;
 use App\Router;
@@ -13,8 +14,7 @@ class ProductoController
 {
     public static function index()
     {
-        $producto = new Producto();
-        $productos = $producto->todo();
+        $productos = (new Producto())->todo();
         $view = new View();
         $view->render('productos/index', ['productos' => $productos]);
     }
@@ -23,7 +23,6 @@ class ProductoController
     {
         $oldData = Session::flash('old_data',[]);
         $errores = Session::flash('message',[]);
-
         $marcas = (new Marca())->todo();
         $view = new View();
         $view->render('productos/form-crear', ['marcas' => $marcas, 'errores' => $errores, 'oldData' => $oldData]);
@@ -36,7 +35,7 @@ class ProductoController
         $producto = $producto->getByPk($parametros['id']);
         $prodMarca = $producto->getIdMarca();
         $marca = new Marca();
-        $marca = $marca->getById($prodMarca);
+        $marca = $marca->getByPk($prodMarca);
         $view = new View();
         $view->render('productos/detalle', ['producto' => $producto, 'marca' => $marca]);
     }
@@ -50,7 +49,6 @@ class ProductoController
             'id_marca' => ['required','numeric'],
         ]);
 
-
         if($validador->fails()){
             Session::set('old_data', $_POST);
             Session::set('error',"alert-danger");
@@ -58,13 +56,33 @@ class ProductoController
             Router::redirect('/productos/nuevo');
         }
 
+        $nombre = $_POST['nombre'];
+
         $datos = [
             'nombre' => $_POST['nombre'],
             'descripcion' => $_POST['descripcion'],
             'precio' => $_POST['precio'],
+            'imagen' => '',
+            'imagen_alt' => 'Zapatillas ' . $nombre,
             'id_marca' => $_POST['id_marca'],
         ];
 
+        $imagen = $_FILES['imagen'];
+        if (!empty($imagen['tmp_name'])){
+            $uploader = new SubirArchivo($_FILES['imagen']);
+            $datos['imagen'] = $uploader->guardar(realpath(Router::publicPath('/imgs/')));
+        } else {
+            $validador = new Validator($_POST,[
+                'imagen' => ['required'],
+            ]);
+
+            if($validador->fails()){
+                Session::set('old_data', $_POST);
+                Session::set('error',"alert-danger");
+                Session::set('message',$validador->getErrores());
+                Router::redirect('/productos/nuevo');
+            }
+        }
 
         try {
             (new Producto())->crear($datos);

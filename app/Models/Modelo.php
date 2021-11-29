@@ -33,14 +33,24 @@ class Modelo
     ];
 
     /**
+     * @param array $buscar
      * @return static[]
      */
-    public function todo() : array
+    public function todo(array $buscar = []) : array
     {
         $db = Connection::getConnection();
         $query = "SELECT * FROM " .$this->tabla;
+        $buscarValores = [];
+        if (count($buscar) > 0){
+            $buscarData = [];
+            foreach ($buscar as $buscarItem){
+                $buscarData[] = $buscarItem[0] . " " . $buscarItem[1] . " :" . $buscarItem[0];
+                $buscarValores[$buscarItem[0]] = $buscarItem[2];
+            }
+            $query .= " WHERE " . implode(" AND ", $buscarData);
+        }
         $stmt = $db->prepare($query);
-        $stmt->execute();
+        $stmt->execute($buscarValores);
         $stmt->setFetchMode(\PDO::FETCH_CLASS, static::class);
         return $stmt->fetchAll();
     }

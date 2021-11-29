@@ -2,12 +2,14 @@
 
 namespace App;
 
+use App\Utilities\Str;
+
 class Router
 {
     /** @var string */
     private $appPath;
     /** @var string */
-    private $publicPath;
+    private static $publicPath;
     /** @var string */
     private static $baseUrlPath;
 
@@ -44,7 +46,7 @@ class Router
     public function __construct(string $appPath)
     {
         $this->appPath = str_replace('\\', '/', $appPath);
-        $this->publicPath = $this->appPath . "/public";
+        self::$publicPath = $this->appPath . "/public";
         $this->generarBaseUrlPath();
     }
 
@@ -56,7 +58,7 @@ class Router
 
         $base = $protocolo . "://" . $host . $port;
 
-        self::$baseUrlPath = str_replace($_SERVER['DOCUMENT_ROOT'], $base, $this->publicPath);
+        self::$baseUrlPath = str_replace($_SERVER['DOCUMENT_ROOT'], $base, self::$publicPath);
     }
 
     /**
@@ -175,8 +177,8 @@ class Router
      * @return string
      */
     protected function parseUrlRoute(string $url): string {
-        $urlDocumentRoot = $_SERVER['DOCUMENT_ROOT'] . $url;
-        return str_replace($this->publicPath, "", $urlDocumentRoot);
+        $urlWithDocumentRoot = $this->removeQueryString($_SERVER['DOCUMENT_ROOT'] . $url);
+        return str_replace(self::$publicPath, "", $urlWithDocumentRoot);
     }
 
     /**
@@ -185,11 +187,18 @@ class Router
      */
     public static function urlTo(string $path = ''): string
     {
-        if(strpos($path,'/') !== 0){
-            $path = '/' . $path;
-        }
-
+        $path = Str::prefixIfMissing($path,'/');
         return self::$baseUrlPath . $path;
+    }
+
+    /**
+     * @param string $path
+     * @return string
+     */
+    public static function publicPath(string $path = ''): string
+    {
+        $path = Str::prefixIfMissing($path,'/');
+        return self::$publicPath . $path;
     }
 
     /**
@@ -200,5 +209,14 @@ class Router
     {
         header('Location: ' .self::urlTo($path));
         exit;
+    }
+
+    protected function removeQueryString(string $urlWithDocumentRoot)
+    {
+        $queryStringStart = strpos($urlWithDocumentRoot, '?');
+        if($queryStringStart !== false) {
+            $urlWithDocumentRoot = substr($urlWithDocumentRoot, 0, $queryStringStart);
+        }
+        return $urlWithDocumentRoot;
     }
 }

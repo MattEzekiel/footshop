@@ -8,7 +8,7 @@ class Producto extends Modelo
 {
     protected $tabla = 'zapatillas';
     protected $primaryKey = 'id_zapatilla';
-    protected $atributos = ['id_marca','nombre','descripcion','precio'];
+    protected $atributos = ['id_marca','nombre','descripcion','precio','imagen','imagen_alt'];
     protected $relaciones = [
         'n-1' => [
             Marca::class => [

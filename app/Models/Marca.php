@@ -7,9 +7,9 @@ use App\DB\Connection;
 
 class Marca extends Modelo
 {
-    protected $table = "marcas";
+    protected $tabla = "marcas";
     protected $primaryKey = "id_marca";
-    protected $attributes = ["nombre"];
+    protected $atributos = ["nombre"];
 
     /**
      * @var int
