@@ -58,6 +58,16 @@ class ProductoController
         $view->render('productos/detalle', ['producto' => $producto, 'marca' => $marca]);
     }
 
+    public static function editarForm()
+    {
+        $parametros = Router::getRouteParameters();
+        $producto = new Producto();
+        $producto = $producto->getByPk($parametros['id']);
+        $marcas = (new Marca())->todo();
+        $view = new View();
+        $view->render('productos/form-editar', ['producto' => $producto, 'marcas' => $marcas]);
+    }
+
     public static function nuevoProducto()
     {
         $validador = new Validator($_POST,[
@@ -121,13 +131,62 @@ class ProductoController
 
     }
 
+    public static function editar()
+    {
+        $id_zapatilla = $_POST['id_zapatilla'];
+
+        $validador = new Validator($_POST,[
+            'nombre' => ['required','min:3'],
+            'descripcion' => ['required','min:11'],
+            'precio' => ['required','numeric'],
+            'id_marca' => ['required','numeric'],
+            'id_zapatilla' => ['required','numeric'],
+        ]);
+
+        if($validador->fails()){
+            Session::set('old_data', $_POST);
+            Session::set('error',"alert-danger");
+            Session::set('message',$validador->getErrores());
+            Router::redirect('/productos/editar/' . $id_zapatilla);
+        }
+
+        $nombre = $_POST['nombre'];
+
+        $datos = [
+            'nombre' => $_POST['nombre'],
+            'descripcion' => $_POST['descripcion'],
+            'precio' => $_POST['precio'],
+            'imagen_alt' => 'Zapatillas ' . $nombre,
+            'id_marca' => $_POST['id_marca'],
+        ];
+
+        $imagen = $_FILES['imagen'];
+        if (!empty($imagen['tmp_name'])){
+            $uploader = new SubirArchivo($_FILES['imagen']);
+            $datos['imagen'] = $uploader->guardar(realpath(Router::publicPath('/imgs/')));
+        } else {
+            $datos['imagen'] = (new Producto())->getByPk($id_zapatilla)->getImg();
+        }
+
+        try {
+            (new Producto())->editar((int)$id_zapatilla,$datos);
+            Session::set('message', "La zapatilla fue editada satisfactoriamente");
+            Session::set('success', "alert-success");
+            Router::redirect('/productos');
+        } catch (\Exception $e) {
+            Session::set('old_data', $_POST);
+            Session::set('message', "Hubo un error al intentar editar la zapatilla. Pruebe de nuevo más tarde");
+            Session::set('error', "alert-danger");
+            Router::redirect('/productos/editar/' . $id_zapatilla);
+        }
+    }
+
     public static function eliminar()
     {
         $parametros = Router::getRouteParameters();
 
         try {
             (new Producto())->delete($parametros['id']);
-
             Session::set('message', "La zapatilla fue borrada de la base de datos");
             Session::set('success', "alert-success");
             Router::redirect('/productos');

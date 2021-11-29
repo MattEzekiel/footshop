@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\Models\Producto $producto
- * @var \App\Models\Producto $marca
+ * @var \App\Models\Marca $marca
  */
 ?>
 

@@ -23,7 +23,7 @@ $auth = new Auth;
     <?php
         endif;
     ?>
-    <form action="<?= Router::urlTo('/productos') ;?>" method="get" class="form-inline">
+    <form action="<?= Router::urlTo('/productos') ;?>" method="get" class="mb-4">
         <div class="form-group">
             <input type="text" class="form-control form-control-lg" id="nombre" name="nombre" placeholder="Buscar nombre de Zapatillas" value="<?= $buscarValores['nombre'] ?? '' ;?>">
             <label for="nombre" class="visually-hidden">Buscar</label>
@@ -62,7 +62,13 @@ $auth = new Auth;
                 <th>Descripción</th>
                 <th>Precio</th>
                 <th>Imagen</th>
+                <?php
+                    if ($auth->isAutenticado()):
+                ?>
                 <th>Acciones</th>
+                <?php
+                    endif;
+                ?>
             </tr>
             </thead>
             <tbody>
@@ -74,12 +80,19 @@ $auth = new Auth;
                     <td><?= $producto->getDescripcion();?></td>
                     <td class="text-center precio-lista">$ <?= number_format($producto->getPrecio(),0,',','.');?></td>
                     <td><img class="img-fluid" src="<?= Router::urlTo('/imgs/') . $producto->getImg();?> " alt="<?= $producto->getImgAlt() ;?>"></td>
+                    <?php
+                        if ($auth->isAutenticado()):
+                    ?>
                     <td>
                         <a href="<?= Router::urlTo('productos/' . $producto->getIdZapatilla()) ;?>" role="button" class="btn btn-toolbar btn-outline-info">Ver Detalle</a>
+                        <a href="<?= Router::urlTo('productos/editar/' . $producto->getIdZapatilla()) ;?>" role="button" class="btn btn-toolbar btn-outline-warning d-flex justify-content-center align-items-center mt-3">Editar</a>
                         <form class="eliminar mt-3" action="<?= Router::urlTo('productos/' . $producto->getIdZapatilla() . '/eliminar') ;?>" method="post">
                             <button class="btn w-100 btn-outline-danger" type="submit">Eliminar</button>
                         </form>
                     </td>
+                    <?php
+                        endif;
+                    ?>
                 </tr>
             <?php endforeach; ?>
             </tbody>

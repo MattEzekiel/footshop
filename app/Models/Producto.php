@@ -56,6 +56,23 @@ class Producto extends Modelo
         return $stmt->fetch();
     }
 
+    public function editar(int $pk, array $data)
+    {
+        $db = Connection::getConnection();
+        $query = "UPDATE zapatillas 
+                  SET nombre = :nombre, descripcion = :descripcion, precio = :precio, imagen = :imagen, imagen_alt = :imagen_alt, id_marca = :id_marca
+                  WHERE id_zapatilla = " . $pk;
+        $stmt = $db->prepare($query);
+        $stmt->execute([
+            'nombre' => $data['nombre'],
+            'descripcion' => $data['descripcion'],
+            'precio' => $data['precio'],
+            'imagen' => $data['imagen'],
+            'imagen_alt' => $data['imagen_alt'],
+            'id_marca' => $data['id_marca'],
+        ]);
+    }
+
     /**
      * @return mixed
      */

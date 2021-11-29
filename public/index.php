@@ -11,6 +11,7 @@ $basePath = realpath(__DIR__ . "/..");
 use App\Controllers\AuthController;
 use App\Controllers\ContactoController;
 use App\Controllers\InicioController;
+use App\Controllers\MarcasController;
 use App\Controllers\ProductoController;
 use App\Controllers\TiendaController;
 use App\Session\Session;
@@ -52,14 +53,21 @@ $router->post('/cerrar-sesion', [AuthController::class, 'logout']);
 $router->get('/productos', [ProductoController::class, 'index']);
 $router->get('/productos/nuevo', [ProductoController::class, 'nuevoForm']);
 $router->get('/productos/{id}', [ProductoController::class,'ver']);
+$router->get('/productos/editar/{id}', [ProductoController::class,'editarForm']);
 $router->post('/productos/{id}/eliminar', [ProductoController::class,'eliminar']);
 $router->post('/productos/nuevo', [ProductoController::class,'nuevoProducto']);
+$router->post('/productos/editar', [ProductoController::class,'editar']);
 
 /**
  * Tienda Productos
  */
 $router->get('/tienda',[TiendaController::class, 'index']);
 $router->get('/tienda/{id}', [TiendaController::class,'detalle']);
+
+/**
+ * ABM Marcas
+ */
+$router->get('/marcas', [MarcasController::class, 'index']);
 
 $router->run();
 

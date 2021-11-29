@@ -50,6 +50,9 @@ $auth = new Auth();
                     <li class="nav-item">
                        <a class="nav-link" href="<?= Router::urlTo('productos') ;?>">Listado de Productos</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= Router::urlTo('marcas') ;?>">Listado de Marcas</a>
+                    </li>
                     <?php
                         endif;
                     ?>
