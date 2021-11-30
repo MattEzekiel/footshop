@@ -75,7 +75,7 @@ class Modelo
      * @param int $rows
      * @return static
      */
-    public function withPagination(int $rows = 6): self
+    public function withPagination(int $rows): self
     {
         $this->pagination['pagination'] = true;
         $this->pagination['rows'] = $rows;

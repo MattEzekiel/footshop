@@ -90,7 +90,7 @@ $auth = new Auth();
     ?>
     <div class="container-fluid">
         <div class="alert py-3 m-0 h-100 <?= $success ? $success : $error;?>" role="alert">
-            <p class="text-center"><?= $message ;?></p>
+            <p class="text-center"><?= is_string($message) ? $message : 'Ocurrió un problema' ;?></p>
         </div>
     </div>
     <?php

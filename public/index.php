@@ -27,6 +27,7 @@ $router->get('/', [InicioController::class, 'index']);
 $router->get('/sobre-nosotros', [InicioController::class, 'sobreNosotros']);
 $router->get('/404', [InicioController::class, 'error404']);
 $router->get('/influencers', [InicioController::class, 'influencers']);
+$router->get('/500', [InicioController::class, 'error500']);
 
 /**
  *Contacto
@@ -68,6 +69,12 @@ $router->get('/tienda/{id}', [TiendaController::class,'detalle']);
  * ABM Marcas
  */
 $router->get('/marcas', [MarcasController::class, 'index']);
+$router->get('/marcas/nuevo', [MarcasController::class, 'nuevoForm']);
+$router->get('/marcas/editar/{id}', [MarcasController::class,'editarForm']);
+$router->post('/marcas/nuevo', [MarcasController::class,'nuevaMarca']);
+$router->post('/marcas/{id}/eliminar', [MarcasController::class,'eliminar']);
+$router->post('/marcas/editar', [MarcasController::class,'editar']);
+
 
 $router->run();
 

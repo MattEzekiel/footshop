@@ -60,12 +60,14 @@ class ProductoController
 
     public static function editarForm()
     {
+        $oldData = Session::flash('old_data',[]);
+        $errores = Session::flash('message',[]);
         $parametros = Router::getRouteParameters();
         $producto = new Producto();
         $producto = $producto->getByPk($parametros['id']);
         $marcas = (new Marca())->todo();
         $view = new View();
-        $view->render('productos/form-editar', ['producto' => $producto, 'marcas' => $marcas]);
+        $view->render('productos/form-editar', ['producto' => $producto, 'marcas' => $marcas, 'errores' => $errores, 'oldData' => $oldData]);
     }
 
     public static function nuevoProducto()

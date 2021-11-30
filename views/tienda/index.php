@@ -3,6 +3,7 @@
  * @var Producto[] $productos
  * @var array $buscarValores
  * @var Marca[] $marcas
+ * @var array $pagination
  */
 
 use App\Models\Marca;
@@ -63,6 +64,76 @@ use App\Router;
             endforeach;
         ?>
     </div>
+            <?php
+            if ($pagination['pages'] > 1):
+                $url = Router::urlTo('tienda') . "?page=";
+                ?>
+                <nav aria-label="Páginas de resultados" class="my-3">
+                    <ul class="pagination justify-content-center">
+                        <?php
+                        if ($pagination['pageNow'] > 1):
+                            ?>
+                            <li class="page-item">
+                                <a class="page-link" href="<?= $url . ($pagination['pageNow'] - 1) ;?>" aria-label="Volver a la página anterior">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Anterior</span>
+                                </a>
+                            </li>
+                        <?php
+                        else :
+                            ?>
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" aria-label="Volver a la página anterior">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Anterior</span>
+                                </a>
+                            </li>
+                        <?php
+                        endif;
+                        ?>
+                        <?php
+                        for($i = 1;$i <= $pagination['pages']; $i++):
+                            ?>
+                            <?php
+                            if ($pagination['pageNow'] != $i):
+                                ?>
+                                <li class="page-item"><a class="page-link" href="<?= $url . $i ;?>"><?= $i ;?></a></li>
+                            <?php
+                            else:
+                                ?>
+                                <li class="page-item active" aria-current="page"><a class="page-link" href="<?= $url . $i ;?>"><?= $i ;?></a></li>
+                            <?php
+                            endif;
+                            ?>
+                        <?php
+                        endfor;
+                        ?>
+                        <?php
+                        if ($pagination['pageNow'] < $pagination['pages']):
+                            ?>
+                            <li class="page-item">
+                                <a class="page-link" href="<?= $url . ($pagination['pageNow'] + 1) ;?>" aria-label="Ir a la página siguiente">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Siguiente</span>
+                                </a>
+                            </li>
+                        <?php
+                        else :
+                            ?>
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" aria-label="Ir a la página siguiente">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Siguiente</span>
+                                </a>
+                            </li>
+                        <?php
+                        endif;
+                        ?>
+                    </ul>
+                </nav>
+            <?php
+            endif;
+            ?>
     <?php
         else :
     ?>

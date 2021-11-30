@@ -41,4 +41,10 @@ class InicioController
         $view = new View();
         $view->render('404', ['Titulo' => 'Error 404']);
     }
+
+    public static function error500()
+    {
+        $view = new View();
+        $view->render('500', ['titulo' => 'Error 500']);
+    }
 }

@@ -24,10 +24,13 @@ class TiendaController
             $condiciones[] = ['id_marca','=',$_GET['id_marca']];
         }
 
-        $productos = $producto->todo($condiciones);
+        $productos = $producto
+            ->withPagination(6)
+            ->todo($condiciones);
+        $pagination = $producto->getPagination();
         $marcas = (new Marca())->todo();
         $view = new View();
-        $view->render('tienda/index', ['productos' => $productos, 'buscarValores' => $buscarValores, 'marcas' => $marcas]);
+        $view->render('tienda/index', ['productos' => $productos, 'pagination' => $pagination, 'marcas' => $marcas]);
     }
 
     public static function detalle()
