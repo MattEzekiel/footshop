@@ -2,15 +2,12 @@
 namespace App\DB;
 
 use App\Env\Loader;
+use App\Router;
 use PDO;
 use PDOException;
 
 class Connection
 {
-    /*protected static $host = "localhost";
-    protected static $user = "root";
-    protected static $pass = "";
-    protected static $base = "footshop";*/
     protected static $db;
 
     /**
@@ -26,14 +23,10 @@ class Connection
             try {
 
                 self::$db = new PDO("mysql:host=" . $host . ";dbname=" . $base . ";charset=utf8mb4", $user, $pass);
-
-                /*echo 'La conexión ha sido un éxito.';*/
-
                 self::$db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
             } catch(PDOException $e) {
-
-                echo "No se pudo conectar a la base.";
+                Router::redirect('/500');
                 exit;
             }
         }

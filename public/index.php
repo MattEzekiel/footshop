@@ -27,6 +27,7 @@ $router->get('/', [InicioController::class, 'index']);
 $router->get('/sobre-nosotros', [InicioController::class, 'sobreNosotros']);
 $router->get('/404', [InicioController::class, 'error404']);
 $router->get('/influencers', [InicioController::class, 'influencers']);
+$router->get('/500', [InicioController::class, 'error500']);
 
 /**
  *Contacto

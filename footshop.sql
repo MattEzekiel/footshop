@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-10-2021 a las 03:45:47
+-- Tiempo de generación: 01-12-2021 a las 00:31:40
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.11
 
@@ -42,7 +42,8 @@ CREATE TABLE `consultas` (
 
 INSERT INTO `consultas` (`id_consulta`, `nombre`, `asunto`, `email`, `consulta`, `usuario_id`) VALUES
 (4, 'asfas', 'sfasfas', 'asfasfa@alsfjla.com', 'lkasjfkgalsjfglasgfas', NULL),
-(9, 'Usuario Default', 'asfasfasfasfa', 'usuario@usuario.com', 'safasfasfasfasfasfas', 1);
+(9, 'Usuario Default', 'asfasfasfasfa', 'usuario@usuario.com', 'safasfasfasfasfasfas', 1),
+(10, 'Usuario Default', 'aaaaaaaa', 'usuario@usuario.com', 'asfasfasfa', 1);
 
 -- --------------------------------------------------------
 
@@ -69,6 +70,25 @@ INSERT INTO `influencers` (`id_influencer`, `nombre`, `oficio`, `img`, `img_alt`
 (4, 'Icardi', 'Deportista', 'icardi.png', 'icardi'),
 (5, 'Kun Agüero', 'Deportista', 'kun.png', 'kun'),
 (6, 'Messi', 'Deportista', 'messi.png', 'messi');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `marcas`
+--
+
+CREATE TABLE `marcas` (
+  `id_marca` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `marcas`
+--
+
+INSERT INTO `marcas` (`id_marca`, `nombre`) VALUES
+(1, 'nike'),
+(2, 'adiddas');
 
 -- --------------------------------------------------------
 
@@ -106,20 +126,26 @@ CREATE TABLE `zapatillas` (
   `descripcion` mediumtext NOT NULL,
   `precio` bigint(20) NOT NULL,
   `imagen` varchar(255) NOT NULL,
-  `imagen_alt` varchar(255) NOT NULL
+  `imagen_alt` varchar(255) NOT NULL,
+  `id_marca` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `zapatillas`
 --
 
-INSERT INTO `zapatillas` (`id_zapatilla`, `nombre`, `descripcion`, `precio`, `imagen`, `imagen_alt`) VALUES
-(1, 'Nike Fluor Green', 'Zapatillas Nike Fluor Green, perfectas para caminatas al aire libre y para jugar en cancha de cemento. Con un sistema antideslizante para mayor agarre a la hora de correr y acolchonadas para evitar cualquier dolor, lastimadura o daños en la planta de los pies.', 42000, 'nike-fluor-green.png', 'Zapatillas Nike Fluor Verdes'),
-(2, 'Nike Fluor Pink', 'Zapatillas Nike Fluor Pink, perfectas para caminatas al aire libre y para jugar en cancha de cemento. Con un sistema antideslizante para mayor agarre a la hora de correr y acolchonadas para evitar cualquier dolor, lastimadura o daños en la planta de los pies.', 37000, 'nike-fluor-pink.png', 'Zapatillas Nike Fluor Rosas'),
-(3, 'Nike Fluor White', 'Zapatillas Nike Fluor White, perfectas para caminatas al aire libre y para jugar en cancha de cemento. Con un sistema antideslizante para mayor agarre a la hora de correr y acolchonadas para evitar cualquier dolor, lastimadura o daños en la planta de los pies.', 38000, 'nike-fluor-white.png', 'Zapatillas Nike Fluor Blancas'),
-(4, 'Nike Fluor Blue', 'Zapatillas Nike Fluor Blue, perfectas para caminatas al aire libre y para jugar en cancha de cemento. Con un sistema antideslizante para mayor agarre a la hora de correr y acolchonadas para evitar cualquier dolor, lastimadura o daños en la planta de los pies.', 36000, 'nike-fluor-blue.png', 'Zapatillas Nike Fluor Azules'),
-(5, 'Nike Fluor Yellow', 'Zapatillas Nike Fluor Yellow, perfectas para caminatas al aire libre y para jugar en cancha de cemento. Con un sistema antideslizante para mayor agarre a la hora de correr y acolchonadas para evitar cualquier dolor, lastimadura o daños en la planta de los pies.', 38000, 'nike-fluor-yelow.png', 'Zapatillas Nike Fluor Amarillas'),
-(6, 'Nike Fluor Red', 'Zapatillas Nike Fluor Red, perfectas para caminatas al aire libre y para jugar en cancha de cemento. Con un sistema antideslizante para mayor agarre a la hora de correr y acolchonadas para evitar cualquier dolor, lastimadura o daños en la planta de los pies.', 40000, 'nike-fluor-red.png', 'Zapatillas Nike Fluor Rojas');
+INSERT INTO `zapatillas` (`id_zapatilla`, `nombre`, `descripcion`, `precio`, `imagen`, `imagen_alt`, `id_marca`) VALUES
+(1, 'Nike Fluor Green', 'Zapatillas Nike Fluor Green, perfectas para caminatas al aire libre y para jugar en cancha de cemento. Con un sistema antideslizante para mayor agarre a la hora de correr y acolchonadas para evitar cualquier dolor, lastimadura o daños en la planta de los pies.', 42000, 'nike-fluor-green.png', 'Zapatillas Nike Fluor Verdes', 1),
+(2, 'Nike Fluor Pink', 'Zapatillas Nike Fluor Pink, perfectas para caminatas al aire libre y para jugar en cancha de cemento. Con un sistema antideslizante para mayor agarre a la hora de correr y acolchonadas para evitar cualquier dolor, lastimadura o daños en la planta de los pies.', 37000, 'nike-fluor-pink.png', 'Zapatillas Nike Fluor Rosas', 1),
+(3, 'Nike Fluor White', 'Zapatillas Nike Fluor White, perfectas para caminatas al aire libre y para jugar en cancha de cemento. Con un sistema antideslizante para mayor agarre a la hora de correr y acolchonadas para evitar cualquier dolor, lastimadura o daños en la planta de los pies.', 38000, 'nike-fluor-white.png', 'Zapatillas Nike Fluor Blancas', 1),
+(4, 'Nike Fluor Blue', 'Zapatillas Nike Fluor Blue, perfectas para caminatas al aire libre y para jugar en cancha de cemento. Con un sistema antideslizante para mayor agarre a la hora de correr y acolchonadas para evitar cualquier dolor, lastimadura o daños en la planta de los pies.', 36000, 'nike-fluor-blue.png', 'Zapatillas Nike Fluor Azules', 1),
+(5, 'Nike Fluor Yellow', 'Zapatillas Nike Fluor Yellow, perfectas para caminatas al aire libre y para jugar en cancha de cemento. Con un sistema antideslizante para mayor agarre a la hora de correr y acolchonadas para evitar cualquier dolor, lastimadura o daños en la planta de los pies.', 38000, 'nike-fluor-yelow.png', 'Zapatillas Nike Fluor Amarillas', 1),
+(6, 'Nike Fluor Red', 'Zapatillas Nike Fluor Red, perfectas para caminatas al aire libre y para jugar en cancha de cemento. Con un sistema antideslizante para mayor agarre a la hora de correr y acolchonadas para evitar cualquier dolor, lastimadura o daños en la planta de los pies.', 40000, 'nike-fluor-red.png', 'Zapatillas Nike Fluor Rojas', 1),
+(7, 'Adidas Fluor White', 'Botines Adidas Fluor White, perfectas para caminatas al aire libre y para dejar todo en la cancha. Con un sistema antideslizante para mayor agarre a la hora de correr y acolchonadas para evitar cualquier dolor, lastimadura o daños en la planta de los pies.', 2700, 'adidas-fluor-white.png', 'Adidas Fluor Blancas', 2),
+(8, 'Adidas Fluor Blue', 'Botines Adidas Fluor Blue, perfectas para dejar todo en la cancha. Con un sistema antideslizante para mayor agarre a la hora de correr y acolchonadas para evitar cualquier dolor, lastimadura o daños en la planta de los pies.', 3200, 'adidas-fluor-blue.png', 'Adidas Fluor Azules', 2),
+(9, 'Adidas Fluor Green', 'Botines Adidas Fluor Blue, perfectas para dejar todo en la cancha. Con un sistema antideslizante para mayor agarre a la hora de correr y acolchonadas para evitar cualquier dolor, lastimadura o daños en la planta de los pies.', 48000, 'adidas-fluor-green.png', 'Adidas Fluor Verdes', 2),
+(10, 'Adidas Fluor Red', 'Botines Adidas Fluor Red, perfectas para dejar todo en la cancha. Con un sistema antideslizante para mayor agarre a la hora de correr y acolchonadas para evitar cualquier dolor, lastimadura o daños en la planta de los pies.', 58000, 'adidas-fluor-red.png', 'Adidas Fluor Rojas', 2),
+(11, 'Adidas Fluor Yellow', 'Botines Adidas Fluor Yellow, perfectas para dejar todo en la cancha. Con un sistema antideslizante para mayor agarre a la hora de correr y acolchonadas para evitar cualquier dolor, lastimadura o daños en la planta de los pies.', 49000, 'adidas-fluor-yellow.png', 'Adidas Fluor Amarillas', 2);
 
 --
 -- Índices para tablas volcadas
@@ -139,6 +165,12 @@ ALTER TABLE `influencers`
   ADD PRIMARY KEY (`id_influencer`);
 
 --
+-- Indices de la tabla `marcas`
+--
+ALTER TABLE `marcas`
+  ADD PRIMARY KEY (`id_marca`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -149,7 +181,8 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `zapatillas`
   ADD PRIMARY KEY (`id_zapatilla`),
-  ADD UNIQUE KEY `nombre` (`nombre`);
+  ADD UNIQUE KEY `nombre` (`nombre`),
+  ADD KEY `id_marca` (`id_marca`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -159,13 +192,19 @@ ALTER TABLE `zapatillas`
 -- AUTO_INCREMENT de la tabla `consultas`
 --
 ALTER TABLE `consultas`
-  MODIFY `id_consulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_consulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `influencers`
 --
 ALTER TABLE `influencers`
   MODIFY `id_influencer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `marcas`
+--
+ALTER TABLE `marcas`
+  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -177,7 +216,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `zapatillas`
 --
 ALTER TABLE `zapatillas`
-  MODIFY `id_zapatilla` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_zapatilla` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- Restricciones para tablas volcadas
@@ -188,6 +227,12 @@ ALTER TABLE `zapatillas`
 --
 ALTER TABLE `consultas`
   ADD CONSTRAINT `consultas_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `zapatillas`
+--
+ALTER TABLE `zapatillas`
+  ADD CONSTRAINT `zapatillas_ibfk_1` FOREIGN KEY (`id_marca`) REFERENCES `marcas` (`id_marca`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

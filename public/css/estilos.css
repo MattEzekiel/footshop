@@ -605,9 +605,9 @@ dt{
 
 @media (min-width: 1200px) {
     .card:before{
-        content: 'NIKE';
+        content: 'FOOT';
         position: absolute;
-        top: 20px;
+        top: 35px;
         left: 20px;
         font-size: 6em;
         font-weight: 900;
@@ -618,7 +618,7 @@ dt{
     }
 
     .card:after{
-        content: 'RUN';
+        content: 'SHOP';
         position: absolute;
         bottom: 20px;
         right: 20px;
