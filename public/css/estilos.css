@@ -578,6 +578,31 @@ dt{
     transform: translateY(0);
 }
 
+.page-link{
+    color: white;
+    background-color: transparent;
+}
+
+.page-item.active .page-link{
+    color: black;
+    background-color: white;
+    border-color: white;
+}
+
+.page-item.disabled{
+    cursor: not-allowed;
+}
+
+.page-item.disabled .page-link{
+    background-color: transparent;
+    color: #788088;
+    border-color: #788088;
+}
+
+.page-link:hover{
+    color: #2a2a2a;
+}
+
 @media (min-width: 1200px) {
     .card:before{
         content: 'NIKE';

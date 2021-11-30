@@ -60,8 +60,9 @@ $auth = new Auth();
                             <?php
                             if ($auth->isAutenticado()):
                                 ?>
-                                <td>
-                                    <form action="<?= Router::urlTo('marcas/' . $marca->getIdMarca() . '/eliminar') ;?>" method="post" class="eliminar d-flex justify-content-center align-items-center w-100">
+                                <td class="d-flex justify-content-center align-items-center flex-column py-3">
+                                    <a href="<?= Router::urlTo('marcas/editar/' . $marca->getIdMarca()) ;?>" role="button" class="btn mb-3 btn-outline-warning">Editar</a>
+                                    <form action="<?= Router::urlTo('marcas/' . $marca->getIdMarca() . '/eliminar') ;?>" method="post" class="eliminar">
                                         <button class="btn m-auto btn-outline-danger">Eliminar</button>
                                     </form>
                                 </td>

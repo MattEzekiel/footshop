@@ -11,8 +11,8 @@ use App\Router;
 
 ?>
 <main class="container py-3 h-100">
-    <h1 class="mt-4">Cargue el nuevo producto</h1>
-    <p class="text-white my-4">Complete el formulario para guardar un nuevo producto o si lo desea puede <a href="<?= Router::urlTo('/productos') ;?>">volver atrás</a></p>
+    <h1 class="mt-4">Editar producto: <?= $producto->getNombre() ;?></h1>
+    <p class="text-white my-4">Complete el formulario para editar el producto o si lo desea puede <a href="<?= Router::urlTo('/productos') ;?>">volver atrás</a></p>
     <form action="<?= Router::urlTo('productos/editar') ;?>" method="post" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-6">

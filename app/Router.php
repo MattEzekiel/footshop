@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Controllers\InicioController;
 use App\Utilities\Str;
 
 class Router
@@ -108,7 +109,7 @@ class Router
         }
 
         if (is_null($fn)) {
-            header('location: 404');
+            self::redirect('/404');
         } else {
             call_user_func($fn);
         }

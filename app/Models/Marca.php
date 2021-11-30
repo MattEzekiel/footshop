@@ -38,6 +38,22 @@ class Marca extends Modelo
     }
 
     /**
+     * @param int $pk
+     * @param array $data
+     */
+    public function editar(int $pk, array $data)
+    {
+        $db = Connection::getConnection();
+        $query = "UPDATE marcas 
+                  SET nombre = :nombre
+                  WHERE id_marca = " . $pk;
+        $stmt = $db->prepare($query);
+        $stmt->execute([
+            'nombre' => $data['nombre'],
+        ]);
+    }
+
+    /**
      * @return int
      */
     public function getIdMarca(): int

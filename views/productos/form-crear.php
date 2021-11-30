@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Marca;
-
 /**
  * @var App\Models\Producto[] $productos
  * @var array $errors
