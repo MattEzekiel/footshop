@@ -8,6 +8,9 @@ use PDOException;
 
 class Connection
 {
+    /**
+     * @string DB
+     */
     protected static $db;
 
     /**

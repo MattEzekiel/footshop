@@ -8,12 +8,18 @@ use App\View;
 
 class AuthController
 {
+    /**
+     * @view login Form
+     */
     public static function loginForm()
     {
         $view = new View();
         $view->render('auth/login');
     }
 
+    /**
+     * Login
+     */
     public static function login()
     {
         $email = $_POST['email'];
@@ -35,6 +41,9 @@ class AuthController
         exit;
     }
 
+    /**
+     * Logout
+     */
     public static function logout()
     {
         $auth = new Auth();
@@ -46,12 +55,18 @@ class AuthController
         header('Location: iniciar-sesion');
     }
 
+    /**
+     * @view Registro
+     */
     public static function registroForm()
     {
         $view = new View();
         $view->render('auth/registro');
     }
 
+    /**
+     * Registro
+     */
     public static function registro()
     {
         $nombre = $_POST['nombre'];
@@ -86,7 +101,6 @@ class AuthController
         }
 
         $auth = new Auth();
-        var_dump($usuario);
         $auth->autenticar($usuario);
 
         $_SESSION['message'] = "Su usuario ha sido creado exitosamente";
@@ -96,6 +110,9 @@ class AuthController
         exit;
     }
 
+    /**
+     * @return void|null
+     */
     public static function errores()
     {
         if(isset($_SESSION['nombre-registro']) || isset($_SESSION['apellido-registro']) || isset($_SESSION['email-registro']) || isset($_SESSION['password-confirm']) || isset($_SESSION['password-registro'])){

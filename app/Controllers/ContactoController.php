@@ -7,12 +7,18 @@ use App\View;
 
 class ContactoController
 {
+    /**
+     * @view Contacto
+     */
     public static function index()
     {
         $view = new View();
         $view->render('contacto/index', ['titulo' => 'Pagina de Contacto']);
     }
 
+    /**
+     * Consulta a base de datos
+     */
     public static function sendContact()
     {
         $nombre = $_POST['nombre'];
@@ -49,6 +55,9 @@ class ContactoController
     }
 
 
+    /**
+     * Errores viejo
+     */
     public static function errores()
     {
         if(isset($_SESSION['nombre-contacto']) || isset($_SESSION['asunto']) || isset($_SESSION['email-contacto']) || isset($_SESSION['consulta'])){
