@@ -30,7 +30,7 @@ class TiendaController
         $pagination = $producto->getPagination();
         $marcas = (new Marca())->todo();
         $view = new View();
-        $view->render('tienda/index', ['productos' => $productos, 'pagination' => $pagination, 'marcas' => $marcas]);
+        $view->render('tienda/index', ['productos' => $productos, 'pagination' => $pagination, 'marcas' => $marcas,'buscarValores' => $buscarValores]);
     }
 
     public static function detalle()

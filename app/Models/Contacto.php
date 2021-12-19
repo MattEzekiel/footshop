@@ -4,8 +4,21 @@ namespace App\Models;
 
 use App\DB\Connection;
 
-class Contacto
+class Contacto extends Modelo
 {
+    protected $tabla = 'consultas';
+    protected $primaryKey = 'id_consulta';
+    protected $atributos = ['id_consulta','nombre','asunto','email','consulta','usuario_id'];
+    protected $relaciones = [
+        'n-1' => [
+            Usuario::class => [
+                'fk' => 'id_usuario',
+                'prop' => 'nombre',
+            ],
+        ]
+    ];
+
+
     /**
      * @var int
      */
@@ -55,5 +68,45 @@ class Contacto
             return true;
         }
 
+    }
+
+    /**
+     * @return string
+     */
+    public function getAsunto(): string
+    {
+        return $this->asunto;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNombre(): string
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIdConsulta(): int
+    {
+        return $this->id_consulta;
+    }
+
+    /**
+     * @return string
+     */
+    public function getConsulta(): string
+    {
+        return $this->consulta;
     }
 }

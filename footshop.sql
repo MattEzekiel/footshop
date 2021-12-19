@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-12-2021 a las 00:31:40
+-- Tiempo de generación: 19-12-2021 a las 01:02:02
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.11
 
@@ -43,7 +43,8 @@ CREATE TABLE `consultas` (
 INSERT INTO `consultas` (`id_consulta`, `nombre`, `asunto`, `email`, `consulta`, `usuario_id`) VALUES
 (4, 'asfas', 'sfasfas', 'asfasfa@alsfjla.com', 'lkasjfkgalsjfglasgfas', NULL),
 (9, 'Usuario Default', 'asfasfasfasfa', 'usuario@usuario.com', 'safasfasfasfasfasfas', 1),
-(10, 'Usuario Default', 'aaaaaaaa', 'usuario@usuario.com', 'asfasfasfa', 1);
+(10, 'Usuario Default', 'aaaaaaaa', 'usuario@usuario.com', 'asfasfasfa', 1),
+(11, 'Otros Usuarios', 'buenass', 'otrousuario@usuario.com', 'Holaaaa', 25);
 
 -- --------------------------------------------------------
 
@@ -102,8 +103,6 @@ CREATE TABLE `usuarios` (
   `apellido` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `imagen` varchar(100) DEFAULT NULL,
-  `imagen_alt` varchar(100) DEFAULT NULL,
   `remember_token` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -111,8 +110,9 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido`, `email`, `password`, `imagen`, `imagen_alt`, `remember_token`) VALUES
-(1, 'Usuario', 'Default', 'usuario@usuario.com', '$2y$10$8toDwahqXOYefgromq4RuOhW7iahrl.TDZ1XWXTqS/1vFSPQKPyzS', NULL, NULL, NULL);
+INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido`, `email`, `password`, `remember_token`) VALUES
+(1, 'Usuario', 'Default', 'usuario@usuario.com', '$2y$10$8toDwahqXOYefgromq4RuOhW7iahrl.TDZ1XWXTqS/1vFSPQKPyzS', NULL),
+(25, 'Otros', 'Usuarios', 'otrousuario@usuario.com', '$2y$10$SNDWW6hdUfsQtStCCs0LJOzZsUHZipW7aEwdMyPI6FCaGMD1ygTZm', NULL);
 
 -- --------------------------------------------------------
 
@@ -192,7 +192,7 @@ ALTER TABLE `zapatillas`
 -- AUTO_INCREMENT de la tabla `consultas`
 --
 ALTER TABLE `consultas`
-  MODIFY `id_consulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_consulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `influencers`
@@ -210,7 +210,7 @@ ALTER TABLE `marcas`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `zapatillas`

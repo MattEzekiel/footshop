@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\DB\Connection;
+use PDO;
 
 class Usuario
 {
@@ -30,20 +31,38 @@ class Usuario
     /**
      * @var string
      */
-    protected $imagen;
-    /**
-     * @var string
-     */
-    protected $imagen_alt;
-    /**
-     * @var string
-     */
     protected $remember_token;
 
     /**
      * @param string $email
      * @return Usuario|null
      */
+
+    public function todo(array $buscar = []) : array
+    {
+        $db = Connection::getConnection();
+        $query = "SELECT * FROM usuarios";
+        $buscarValores = [];
+        $queryValues = '';
+        if (count($buscar) > 0){
+            $buscarData = [];
+            foreach ($buscar as $buscarItem){
+                $buscarData[] = $buscarItem[0] . " " . $buscarItem[1] . " :" . $buscarItem[0];
+                $buscarValores[$buscarItem[0]] = $buscarItem[2];
+            }
+            $queryValues = " WHERE " . implode(" AND ", $buscarData);
+            $query .= $queryValues;
+        }
+        if ($this->pagination['pagination']){
+            $this->queryPaginador($queryValues, $buscarValores);
+            $query .= " LIMIT " . $this->pagination['offset'] . ', ' . $this->pagination['rows'];
+        }
+        $stmt = $db->prepare($query);
+        $stmt->execute($buscarValores);
+        $stmt->setFetchMode(\PDO::FETCH_CLASS, static::class);
+        return $stmt->fetchAll();
+    }
+
     public function getByEmail(string $email): ? Usuario
     {
         $db = Connection::getConnection();
@@ -106,6 +125,59 @@ class Usuario
         $usuario->setPassword($datos['password']);
 
         return $usuario;
+    }
+
+    /**
+     * @param int $pk
+     * @param array $data
+     * @return void
+     */
+    public function editar(int $pk, array $data)
+    {
+        $db = Connection::getConnection();
+        $query = "UPDATE usuarios 
+                  SET nombre = :nombre, apellido = :apellido, email = :email, password = :password
+                  WHERE id_usuario = " . $pk;
+        $stmt = $db->prepare($query);
+        $stmt->execute([
+            'nombre' => $data['nombre'],
+            'apellido' => $data['apellido'],
+            'email' => $data['email'],
+            'password' => $data['password'],
+        ]);
+    }
+
+    /**
+     * @param int $rows
+     * @return static
+     */
+    public function withPagination(int $rows): self
+    {
+        $this->pagination['pagination'] = true;
+        $this->pagination['rows'] = $rows;
+        $this->pagination['pageNow'] = (int) ($_GET['page'] ?? 1);
+        $this->pagination['offset'] = ($rows * $this->pagination['pageNow']) - $rows;
+        return $this;
+    }
+
+    /**
+     * @param string $query
+     * @param array $values
+     */
+    protected function queryPaginador(string $query = "", array $values = [])
+    {
+        $db = Connection::getConnection();
+        $query = "SELECT COUNT(*) AS total FROM usuarios" . $query;
+        $stmt = $db->prepare($query);
+        $stmt->execute($values);
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        $this->pagination['total'] = $resultado['total'];
+        $this->pagination['pages'] = ceil($resultado['total'] / $this->pagination['rows']);
+    }
+
+    public function getPagination(): array
+    {
+        return $this->pagination;
     }
 
 
@@ -171,38 +243,6 @@ class Usuario
     public function setEmail(string $email): void
     {
         $this->email = $email;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getImagen() : string
-    {
-        return $this->imagen;
-    }
-
-    /**
-     * @param mixed $imagen
-     */
-    public function setImagen(string $imagen): void
-    {
-        $this->imagen = $imagen;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getImagenAlt() : string
-    {
-        return $this->imagen_alt;
-    }
-
-    /**
-     * @param mixed $imagen_alt
-     */
-    public function setImagenAlt(string $imagen_alt): void
-    {
-        $this->imagen_alt = $imagen_alt;
     }
 
     /**

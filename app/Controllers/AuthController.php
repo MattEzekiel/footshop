@@ -133,6 +133,9 @@ class AuthController
         if(strlen(trim($nombre)) < 3){
             $_SESSION['nombre-registro'] = "El nombre es demasiado corto";
         }
+        if(empty(strlen(trim($nombre)))){
+            $_SESSION['nombre-registro'] = "Este campo no puede estar vacío";
+        }
     }
 
     /**
@@ -141,6 +144,9 @@ class AuthController
     public static function confirmApellido(string $apellido){
         if(strlen(trim($apellido)) < 3){
             $_SESSION['apellido-registro'] = "El apellido es demasiado corto.";
+        }
+        if(empty(strlen(trim($apellido)))){
+            $_SESSION['apellido-registro'] = "Este campo no puede estar vacío";
         }
     }
 
@@ -151,6 +157,9 @@ class AuthController
         if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
             $_SESSION['email-registro'] = "Su email no es válido";
         }
+        if(empty(strlen(trim($email)))){
+            $_SESSION['email-registro'] = "Este campo no puede estar vacío";
+        }
     }
 
     /**
@@ -159,6 +168,9 @@ class AuthController
     public static function confirmPassword(string $password){
         if(strlen(trim($password)) < 4){
             $_SESSION['password-registro'] = "Su contraseña es demasiado corta";
+        }
+        if(empty(strlen(trim($password)))){
+            $_SESSION['password-registro'] = "Este campo no puede estar vacío";
         }
     }
 

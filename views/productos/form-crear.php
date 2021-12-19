@@ -8,7 +8,6 @@
  */
 
 use App\Router;
-
 ?>
 <main class="container py-3 h-100">
     <h1 class="mt-4">Cargue el nuevo producto</h1>
@@ -112,10 +111,11 @@ use App\Router;
                 <?= isset($errors['id_marca']) ? 'aria-describedby="error-id_marca"' : '';?>
             >
                 <?php
-                foreach ($marcas as $marca):
-                    ?>
+                    foreach ($marcas as $marca):
+                ?>
                     <option
                             value="<?= $marca->getIdMarca() ;?>"
+                            <?= $oldData['id_marca'] == $marca->getIdMarca() ? 'selected' : '' ;?>
                     >
                         <?= ucfirst($marca->getNombre()) ;?>
                     </option>

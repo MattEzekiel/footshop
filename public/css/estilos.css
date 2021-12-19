@@ -603,6 +603,22 @@ dt{
     color: #2a2a2a;
 }
 
+select{
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+option{
+    color: black;
+}
+
+#tabla-usuarios td{
+    vertical-align: middle;
+    text-align: center;
+}
+
 @media (min-width: 1200px) {
     .card:before{
         content: 'FOOT';

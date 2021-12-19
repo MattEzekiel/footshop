@@ -34,7 +34,7 @@ class ProductoController
         $pagination = $producto->getPagination();
         $marcas = (new Marca())->todo();
         $view = new View();
-        $view->render('productos/index', ['productos' => $productos, 'marcas' => $marcas, 'pagination' => $pagination]);
+        $view->render('productos/index', ['productos' => $productos, 'marcas' => $marcas, 'pagination' => $pagination,'buscarValores' => $buscarValores]);
     }
 
     public static function nuevoForm()

@@ -10,7 +10,6 @@ $password = $_SESSION['password-registro'] ?? null;
 $password_confirm = $_SESSION['password-confirm'] ?? null;
 
 unset($_SESSION['nombre-registro'],$_SESSION['apellido-registro'],$_SESSION['email-registro'],$_SESSION['password-registro'],$_SESSION['password-confirm']);
-
 ?>
 <main id="registrarse" class="container-fluid py-5">
     <div class="container mt-2">
@@ -29,10 +28,10 @@ unset($_SESSION['nombre-registro'],$_SESSION['apellido-registro'],$_SESSION['ema
                         if (isset($nombre)):
                     ?>
                         aria-describedby="error-nombre"
-                        value="<?= $_SESSION['old_data']['nombre'] ;?>"
                     <?php
                         endif;
                     ?>
+                        value="<?= $_SESSION['old_data']['nombre'] ?? '' ;?>"
                 >
                 <small>El nombre debe tener al menos 3 caracteres</small>
                 <?php
@@ -57,10 +56,10 @@ unset($_SESSION['nombre-registro'],$_SESSION['apellido-registro'],$_SESSION['ema
                         if (isset($apellido)):
                     ?>
                         aria-describedby="error-apellido"
-                        value="<?= $_SESSION['old_data']['apellido'] ;?>"
                     <?php
-                    endif;
+                        endif;
                     ?>
+                        value="<?= $_SESSION['old_data']['apellido'] ?? '' ;?>"
                 >
                 <small>El apellido debe tener al menos 3 caracteres</small>
                 <?php
@@ -89,6 +88,7 @@ unset($_SESSION['nombre-registro'],$_SESSION['apellido-registro'],$_SESSION['ema
                     <?php
                         endif;
                     ?>
+                        value="<?= $_SESSION['old_data']['email'] ?? '' ;?>"
                 >
                 <?php
                     if (isset($email)):

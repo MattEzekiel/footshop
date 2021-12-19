@@ -56,6 +56,11 @@ class Producto extends Modelo
         return $stmt->fetch();
     }
 
+    /**
+     * @param int $pk
+     * @param array $data
+     * @return void
+     */
     public function editar(int $pk, array $data)
     {
         $db = Connection::getConnection();

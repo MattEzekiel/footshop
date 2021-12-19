@@ -9,11 +9,13 @@ $basePath = realpath(__DIR__ . "/..");
 \App\Env\Loader::cargar($basePath);
 
 use App\Controllers\AuthController;
+use App\Controllers\ConsultaController;
 use App\Controllers\ContactoController;
 use App\Controllers\InicioController;
 use App\Controllers\MarcasController;
 use App\Controllers\ProductoController;
 use App\Controllers\TiendaController;
+use App\Controllers\UsuarioController;
 use App\Session\Session;
 
 Session::start();
@@ -74,6 +76,18 @@ $router->get('/marcas/editar/{id}', [MarcasController::class,'editarForm']);
 $router->post('/marcas/nuevo', [MarcasController::class,'nuevaMarca']);
 $router->post('/marcas/{id}/eliminar', [MarcasController::class,'eliminar']);
 $router->post('/marcas/editar', [MarcasController::class,'editar']);
+
+/**
+ * AMB de usuarios
+ */
+$router->get('/usuarios', [UsuarioController::class, 'index']);
+$router->get('/usuarios/editar/{id}', [UsuarioController::class, 'editarForm']);
+$router->post('/usuarios/editar', [UsuarioController::class,'editar']);
+
+/**
+ * AMB de Consultas
+ */
+$router->get('/consultas', [ConsultaController::class, 'index']);
 
 
 $router->run();
